@@ -1,0 +1,13 @@
+---
+"workspace:reset_font_size": none
+"input:toggle_ai_ask_follow_up": none
+"notebookview:decrease_font_size": none
+"terminal:ask_ai_assistant": none
+"workspace:toggle_ai_assistant": none
+"editor_view:cmd_down": cmd-j
+"notebookview:increase_font_size": none
+"workspace:decrease_font_size": none
+"workspace:increase_font_size": none
+"notebookview:reset_font_size": none
+"input:open_completion_suggestions": tab
+"input:toggle_input_type": none

@@ -1,0 +1,125 @@
+#!/usr/bin/env zsh
+
+local help verbose use_default dry custom delete
+
+local usage=(
+	'Usage:'
+	'  dotsetup [-h|--help] [-v|--verbose]'
+	'  dotsetup [-d|--default]  [--uninstall]'
+	'  dotsetup [-n|--dry-run] [-c|--custom]'
+)
+
+local deps_list=(
+	'stow'
+	'git'
+)
+
+zparseopts -D -F \
+	{h,-help}=help \
+	{v,-verbose}=verbose \
+	{d,-default}=use_default \
+	{n,-dry-run}=dry \
+	-uninstall=delete \
+	{c,-custom}+:=custom ||
+	{ print -l "\n${usage[@]}" && exit 1 }
+
+function parse_argv() {
+	[[ -z $help ]] || { print -l "${usage[@]}" && exit 0 }
+
+	[[ -z $custom ]] || {
+		local temp_arr=()
+
+		for i in {2..$#custom[@]..2}; do
+			temp_arr+=("${custom[$i]}")
+		done
+
+		unset custom
+		custom=("${temp_arr[@]}")
+
+		unset temp_arr
+	}
+}
+
+function check_deps() {
+	[[ ${#@} != 0 ]] || { echo '[!] check_deps :: none passed' && exit 2 }
+
+	local failed
+
+	for dep in "$@"; do
+		type "$dep" &>/dev/null || { echo "[!] No $dep installed" && failed=1 }
+	done
+
+	[[ -z $failed ]] || { exit 1 }
+}
+
+function check_dir() {
+	local target="$1"
+	[[ -n $target ]] || { echo '[!] check_dir :: no dir' && exit 2 }
+
+	[[ -e $target ]] || { echo '[!] check_dir :: dir do not exist' "\n$target" && exit 2 }
+	[[ -d $target ]] || { echo '[!] check_dir :: not a dir' "\n$target" && exit 2 }
+}
+
+function deploy() {
+	local target="$1"
+	[[ -n $target ]] || { echo '[!] deploy :: no target' && exit 2 }
+
+	check_dir "$target"
+
+	local args=(
+		'-R'  # restow
+	)
+
+	[[ -z $dry ]] || { args+=('--simulate') }
+	[[ -z $delete ]] || { args+=('--delete') }
+
+	local packages=()
+
+	for package in "$target"/*; do
+		packages+=("$(basename $package)")
+	done
+
+	[[ -z $verbose ]] || {
+		args+=('-v')
+
+		echo '[?] Found following packages in the dir:'
+
+		for idx in {1.."${#packages[@]}"}; do
+			echo "$idx." "${packages[$idx]}"
+		done
+
+		echo '\n[?] Press <Enter> to continue'
+		read
+	}
+
+	stow \
+		"${args[@]}" \
+		-t "$HOME" \
+		-d "$target" \
+		"${packages[@]}"
+
+	return "$?"
+}
+
+function main() {
+	check_deps "${deps_list[@]}"
+
+	local dir_list=()
+
+	[[ -z $use_default ]] || { dir_list+=('default') }
+
+	[[ -z $custom ]] || { dir_list+=("${custom[@]}") }
+
+	for dir in "${dir_list[@]}"; do
+		[[ -z $verbose ]] || {
+			echo '\n[?] stow on dir' "$dir"
+			echo '[?] Press <Enter> to continue'
+			read	
+		}
+
+		deploy "$dir"
+	done
+}
+
+parse_argv
+main

@@ -1,0 +1,26 @@
+#!/usr/bin/env zsh
+
+local help 
+
+local description=(
+	'Caffeinate wrapper using minutes'
+	'\nUsed opts:'
+	'	-d=No display sleep'
+	'	-m=No disk sleep'
+	'	-i=No system idle\n'
+)
+
+local usage=(
+	'Usage:'
+	'	caffeinate [-h|--help]'
+	'	caffeinate <minutes>'
+)
+
+zparseopts -D -F -- \
+	{h,-help}=help ||
+	{ print -l "${usage[@]}" && exit 1 }
+
+[[ -z $help ]] || { print -l "${description[@]}" "${usage[@]}" && exit 0 }
+
+killall caffeinate &>/dev/null || true
+( /usr/bin/caffeinate -dmi -t "$(( $1 * 60 ))" & disown ) &>/dev/null || true

@@ -1,0 +1,46 @@
+#!/usr/bin/env zsh
+
+local help
+
+local usage=(
+	'Usage:'
+	'	adbinstall [-h|--help]'
+)
+
+local deps_list=(
+	'adb'
+	'fd'
+	'fzf'
+)
+
+zparseopts -D -F -- \
+	{h,-help}=help ||
+	{ print -l "${usage[@]}" && exit 1 }
+
+[[ -z $help ]] || { print -l "${usage[@]}" && exit 0 }
+
+function check_deps() {
+	[[ ${#@} != 0 ]] || { echo '[!] check_deps :: none passed' && exit 2 }
+
+	local failed
+
+	for dep in "$@"; do
+		type "$dep" &>/dev/null || { echo "[!] No $dep installed" && failed=1 }
+	done
+
+	[[ -z $failed ]] || { exit 2 }
+}
+
+function main() {
+	check_deps "${deps_list[@]}"
+
+	fd -t f -e apk -IH --max-depth 10 |
+	fzf \
+		--multi \
+		--preview 'stat -f%Sm {}' \
+		--preview-window "right:$(( $(tput cols) / 4 * 3 )):border-vertical" \
+		--bind "ctrl-\\:change-preview-window($(( $(tput cols) / 5 ))|$(( $(tput cols) / 4 * 3 )))" |
+	xargs -I {} adb install -d -r {}
+}
+
+main

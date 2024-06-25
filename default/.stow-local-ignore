@@ -1,0 +1,17 @@
+# Ignore common root-level project files
+.gitmodules
+README.*
+LICENSE.*
+.gitignore
+
+# Ignore git directory
+.git
+
+# Ignore specific package or directory
+base
+
+# Ignore setup script
+dotsetup
+
+# MasOS stuff
+.DS_Store

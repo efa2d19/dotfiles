@@ -1,0 +1,94 @@
+# -- Changing Window Focus --
+
+# change window focus within space
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+alt - h : yabai -m window --focus west
+alt - l : yabai -m window --focus east
+
+# -- Modifying Window Size --
+
+# make smaller
+ctrl + alt + cmd - 0x1B : yabai -m window --resize right:-50:0; \
+						  yabai -m window --resize left:50:0; \
+						  yabai -m window --resize top:0:50; \
+						  yabai -m window --resize bottom:0:-50
+
+# make bigger
+ctrl + alt + cmd - 0x18 : yabai -m window --resize right:50:0; \
+						  yabai -m window --resize left:-50:0; \
+						  yabai -m window --resize top:0:-50; \
+						  yabai -m window --resize bottom:0:50
+
+# make bigger vertically
+ctrl + alt + cmd - up : yabai -m window --resize top:0:-50; \
+						yabai -m window --resize bottom:0:50
+
+# make smaller vertically
+ctrl + alt + cmd - down : yabai -m window --resize top:0:50; \
+						yabai -m window --resize bottom:0:-50
+
+# make bigger horizontally
+ctrl + alt + cmd - right : yabai -m window --resize left:-50:0; \
+						  yabai -m window --resize right:50:0
+
+# make smaller horizontally
+ctrl + alt + cmd - left : yabai -m window --resize left:50:0; \
+						  yabai -m window --resize right:-50:0
+
+# maximize a window
+ctrl + alt + cmd - k : yabai -m window float --grid 1:1:0:0:1:1; \
+					   yabai -m window --toggle zoom-fullscreen
+
+# center a window
+ctrl + alt + cmd - space : yabai -m window --grid 4:4:1:1:2:2
+meh - space : yabai -m window --toggle float --grid 4:4:1:1:2:2
+
+# balance out tree of windows (resize to occupy same area)
+ctrl + alt + cmd - j : yabai -m space --balance
+
+# -- Moving Windows Around --
+
+# move window and split
+hyper - up : yabai -m window --warp north
+hyper - down : yabai -m window --warp south
+hyper - left : yabai -m window --warp west
+hyper - right : yabai -m window --warp east
+
+# swap windows
+hyper - j : yabai -m window --swap south
+hyper - k : yabai -m window --swap north
+hyper - h : yabai -m window --swap west
+hyper - l : yabai -m window --swap east
+
+# split
+ctrl + alt + cmd - h : yabai -m window --toggle split
+
+# replace and hide
+ctrl + alt + cmd - l : yabai -m window --stack next
+
+# move window to prev and next space
+ctrl + alt + cmd - 0x21 : yabai -m window --space prev && \
+						  osascript -e 'tell application "System Events" to key code 123 using control down'
+ctrl + alt + cmd - 0x1E : yabai -m window --space next && \
+						  osascript -e 'tell application "System Events" to key code 124 using control down'
+
+# move window to space
+hyper - 1 : yabai -m window --space 1
+hyper - 2 : yabai -m window --space 2
+hyper - 3 : yabai -m window --space 3
+hyper - 4 : yabai -m window --space 4
+hyper - 5 : yabai -m window --space 5
+hyper - 6 : yabai -m window --space 6
+
+
+# -- Custom --
+
+cmd + shift - b : ~/.local/bin/skhd/bitwarden.sh
+ctrl - f5 :  ~/.local/bin/skhd/inputmute.sh
+ctrl - f9 : ~/.local/bin/skhd/outputswitch.sh
+
+
+# -- Extensions --
+
+.load ".skhdrc.ext"

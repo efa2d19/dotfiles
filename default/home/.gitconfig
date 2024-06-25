@@ -1,0 +1,62 @@
+[credential]
+	helper = store
+
+[user]
+	name = efa2d19
+	email = <placeholder>
+	
+[commit]
+	gpgsign = true
+
+[tag]
+	gpgsign = true
+
+[gpg]
+	format = ssh
+
+[alias]
+	lgs = log --decorate --graph --oneline
+	logs = log --decorate --graph
+	pullsafe = !git stash -m temp && git pull && git stash pop
+
+[push]
+	autoSetupRemote = true
+
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    light = false
+    side-by-side = true
+    line-numbers = true
+
+[merge]
+    conflictstyle = diff3
+	tool = intellij
+
+[mergetool "intellij"]
+	cmd = studio merge \
+		"$(pwd)/$LOCAL" \
+		"$(pwd)/$REMOTE" \
+		"$(pwd)/$BASE" \
+		"$(pwd)/$MERGED"
+	trustExitCode = false
+
+[mergetool]
+	keepBackup = false
+
+[diff]
+    colorMoved = default
+
+[gpg "ssh"]
+	allowedSignersFile = ~/.config/git/allowed_signers
+	
+[rerere]
+	enabled = true
+
+[include]
+    path = ~/.gitconfig.ext

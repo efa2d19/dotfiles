@@ -25,7 +25,6 @@ setopt NULLGLOB
 plugins=(
 	evalcache
 	git
-	adb
 	magic-enter
 	colored-man-pages
 	extract

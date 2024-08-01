@@ -8,6 +8,7 @@ tap "koekeishiya/formulae"
 tap "mac-cleanup/mac-cleanup-py"
 tap "teamookla/speedtest"
 brew "allure"
+brew "libgit2@1.7"
 brew "bat"
 brew "bitwarden-cli", link: false
 brew "btop"

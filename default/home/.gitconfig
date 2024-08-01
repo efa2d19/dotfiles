@@ -24,6 +24,8 @@
 
 [core]
 	pager = delta
+	commitGraph = true
+	preloadIndex = true
 
 [interactive]
 	diffFilter = delta --color-only

@@ -23,19 +23,19 @@
 	autoSetupRemote = true
 
 [core]
-    pager = delta
+	pager = delta
 
 [interactive]
-    diffFilter = delta --color-only
+	diffFilter = delta --color-only
 
 [delta]
-    navigate = true
-    light = false
-    side-by-side = true
-    line-numbers = true
+	navigate = true
+	light = false
+	side-by-side = true
+	line-numbers = true
 
 [merge]
-    conflictstyle = diff3
+	conflictstyle = diff3
 	tool = intellij
 
 [mergetool "intellij"]
@@ -50,7 +50,7 @@
 	keepBackup = false
 
 [diff]
-    colorMoved = default
+	colorMoved = default
 
 [gpg "ssh"]
 	allowedSignersFile = ~/.config/git/allowed_signers
@@ -59,4 +59,4 @@
 	enabled = true
 
 [include]
-    path = ~/.gitconfig.ext
+	path = ~/.gitconfig.ext

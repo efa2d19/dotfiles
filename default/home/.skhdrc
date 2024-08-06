@@ -50,16 +50,16 @@ ctrl + alt + cmd - j : yabai -m space --balance
 # -- Moving Windows Around --
 
 # move window and split
-hyper - up : yabai -m window --warp north
-hyper - down : yabai -m window --warp south
-hyper - left : yabai -m window --warp west
-hyper - right : yabai -m window --warp east
+hyper - k : yabai -m window --warp north
+hyper - j : yabai -m window --warp south
+hyper - h : yabai -m window --warp west
+hyper - l : yabai -m window --warp east
 
 # swap windows
-hyper - j : yabai -m window --swap south
-hyper - k : yabai -m window --swap north
-hyper - h : yabai -m window --swap west
-hyper - l : yabai -m window --swap east
+ctrl + alt + cmd - k : yabai -m window --swap north
+ctrl + alt + cmd - j : yabai -m window --swap south
+ctrl + alt + cmd - h : yabai -m window --swap west
+ctrl + alt + cmd - l : yabai -m window --swap east
 
 # split
 ctrl + alt + cmd - h : yabai -m window --toggle split

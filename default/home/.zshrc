@@ -107,7 +107,7 @@ export GPG_TTY="$(tty)"
 export HOMEBREW_BUNDLE_FILE='.brewfile'
 
 ## magic-enter
-MAGIC_ENTER_GIT_COMMAND='gst -uno .'
+MAGIC_ENTER_GIT_COMMAND='gst -u no .'
 MAGIC_ENTER_OTHER_COMMAND='l .'
 
 ## Secretive

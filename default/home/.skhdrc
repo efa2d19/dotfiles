@@ -9,31 +9,31 @@ alt - l : yabai -m window --focus east
 # -- Modifying Window Size --
 
 # make smaller
-ctrl + alt + cmd - 0x1B : yabai -m window --resize right:-50:0; \
+meh - 0x1B : yabai -m window --resize right:-50:0; \
 						  yabai -m window --resize left:50:0; \
 						  yabai -m window --resize top:0:50; \
 						  yabai -m window --resize bottom:0:-50
 
 # make bigger
-ctrl + alt + cmd - 0x18 : yabai -m window --resize right:50:0; \
+meh - 0x18 : yabai -m window --resize right:50:0; \
 						  yabai -m window --resize left:-50:0; \
 						  yabai -m window --resize top:0:-50; \
 						  yabai -m window --resize bottom:0:50
 
 # make bigger vertically
-ctrl + alt + cmd - up : yabai -m window --resize top:0:-50; \
+meh - k : yabai -m window --resize top:0:-50; \
 						yabai -m window --resize bottom:0:50
 
 # make smaller vertically
-ctrl + alt + cmd - down : yabai -m window --resize top:0:50; \
+meh - j : yabai -m window --resize top:0:50; \
 						yabai -m window --resize bottom:0:-50
 
 # make bigger horizontally
-ctrl + alt + cmd - right : yabai -m window --resize left:-50:0; \
+meh - l : yabai -m window --resize left:-50:0; \
 						  yabai -m window --resize right:50:0
 
 # make smaller horizontally
-ctrl + alt + cmd - left : yabai -m window --resize left:50:0; \
+meh - h : yabai -m window --resize left:50:0; \
 						  yabai -m window --resize right:-50:0
 
 # maximize a window

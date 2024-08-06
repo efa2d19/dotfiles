@@ -37,7 +37,7 @@ meh - h : yabai -m window --resize left:50:0; \
 						  yabai -m window --resize right:-50:0
 
 # maximize a window
-ctrl + alt + cmd - k : yabai -m window float --grid 1:1:0:0:1:1; \
+ctrl + alt + cmd - i : yabai -m window float --grid 1:1:0:0:1:1; \
 					   yabai -m window --toggle zoom-fullscreen
 
 # center a window
@@ -45,7 +45,7 @@ ctrl + alt + cmd - space : yabai -m window --grid 4:4:1:1:2:2
 meh - space : yabai -m window --toggle float --grid 4:4:1:1:2:2
 
 # balance out tree of windows (resize to occupy same area)
-ctrl + alt + cmd - j : yabai -m space --balance
+ctrl + alt + cmd - y : yabai -m space --balance
 
 # -- Moving Windows Around --
 
@@ -62,10 +62,10 @@ ctrl + alt + cmd - h : yabai -m window --swap west
 ctrl + alt + cmd - l : yabai -m window --swap east
 
 # split
-ctrl + alt + cmd - h : yabai -m window --toggle split
+ctrl + alt + cmd - u : yabai -m window --toggle split
 
 # replace and hide
-ctrl + alt + cmd - l : yabai -m window --stack next
+ctrl + alt + cmd - o : yabai -m window --stack next
 
 # move window to prev and next space
 ctrl + alt + cmd - 0x21 : yabai -m window --space prev && \

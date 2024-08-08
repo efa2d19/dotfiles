@@ -107,8 +107,8 @@ export GPG_TTY="$(tty)"
 export HOMEBREW_BUNDLE_FILE='.brewfile'
 
 ## magic-enter
-MAGIC_ENTER_GIT_COMMAND='gst -u no .'
-MAGIC_ENTER_OTHER_COMMAND='l .'
+MAGIC_ENTER_GIT_COMMAND='gst -u no'
+MAGIC_ENTER_OTHER_COMMAND='l'
 
 ## Secretive
 export SSH_AUTH_SOCK="$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"

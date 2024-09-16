@@ -99,7 +99,6 @@ alias git@prune='git fetch --prune && git branch -vv | awk "/: gone]/ && !/^\*/ 
 
 ## Misc
 alias bat='f() { command bat "$@" 2>/dev/null; [[ $? == 0 ]] || { bati "$@" }; return "$?" }; f'
-alias agi='f() { ag --nobreak --noheading "$1" | fzf --delimiter : --with-nth 1,2 --preview="bat --style=numbers --color=always {1} --highlight-line {2}" }; f'
 
 #  -- Custom exports --
 export EDITOR='micro'

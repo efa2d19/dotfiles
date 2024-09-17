@@ -23,6 +23,8 @@ zparseopts -D -F \
 	{c,-custom}+:=custom ||
 	{ print -l "\n${usage[@]}" && exit 1 }
 
+local self_location="$(realpath $0 | xargs dirname)"
+
 function parse_argv() {
 	[[ -z $help ]] || { print -l "${usage[@]}" && exit 0 }
 
@@ -61,7 +63,7 @@ function check_dir() {
 }
 
 function deploy() {
-	local target="$1"
+	local target="${self_location}/$1"
 	[[ -n $target ]] || { echo '[!] deploy :: no target' && exit 2 }
 
 	check_dir "$target"

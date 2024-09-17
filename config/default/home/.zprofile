@@ -7,6 +7,7 @@ export JAVA_HOME="$(/usr/libexec/java_home -v 17)"
 
 # -- Custom PATH mod --
 ## Brew stuff
+export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/coreutils/libexec/gnubin${PATH+:$PATH}"
 export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/node@20/bin${PATH+:$PATH}"
 export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/python@3.12/bin${PATH+:$PATH}"
 export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/curl/bin${PATH+:$PATH}"

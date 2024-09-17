@@ -2,54 +2,43 @@
 
 ## 🔎 Overview
 
-Yet another personal dotfiles repo with my macOS setup. 
+Yet another personal dotfiles repo.
 
 ## 💡 Usage options
 
-- `--help`
-  > Prints usage, aka help message
-  ```bash
-  ./dotsetup -h
-  Usage:
-    dotsetup [-h|--help] [-v|--verbose]
-    dotsetup [-d|--default]  [--uninstall]
-    dotsetup [-n|--dry-run] [-c|--custom]
-  ```
+- `make`
+  > Executes all script below, aka `make all`
 
-- `--verbose`
-  > Pass verbose flag to stow
-  > Also stops on every dir and asks for confirmation
-  > Plus stops before stowing and validate all modules in current dir
+- `make brew`
+  > Checks if brew is isntalled, otherwise installs it using online installer
 
-- `--dry-run`
-  > Pass dry run flag to stow 
+- `make pkg`
+  > Installs brew formulaes, casks, and mas apps\
+  > Also see: make brew-pkg, make brew-apps
 
-- `--default`
-  > Use default dir
+- `make brew-pkg`
+  > Installs brew formulaes and taps from Brewfile
 
-- `--custom`
-  > Add custom modules
-  > Recomemded to be used with submodules, which are being ignored by default
-  ```bash
-  ./dotsetup -c <..> -c <...>
-  ```
+- `make brew-apps`
+  > Installs brew casks and mas apps from Caskfile
 
-- `--uninstall`
-  > Unstow all specifed dirs (default or custom ones if specified)
+- `make ensure-stow`
+  > Checks if stow is installed, otherwise installs one using brew\
+  > Also see: make brew
 
-## Submodules
+- `make link`
+  > Links default configs in verbose mode
 
-### Add submodule
+- `make unlink`
+  > Unlikns default configs in verbose mode
 
-```bash
-git submodule add -f https://github.com/<username>/<repo>.git <dir-name>
-```
+- `make sys`
+  > Sets up default system settings\
+  > With NO_SYSTEM_RENAME end set doesn't rename pc\
+  > Other envs: COMPUTER_NAME, LANGUAGES, LOCALE, MEASUREMENT_UNITS
 
-> Don't forget to reset some files to avoid something being accidentally pushed to the repo
-```bash
-git restore --staged <dir-name>
-git restore --staged .gitmodules
-```
+- `make dock`
+  > Removes all items in dock and adds default ones
 
 ## 📝 License
 

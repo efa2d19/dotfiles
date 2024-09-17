@@ -56,7 +56,7 @@ alias node@latest='export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/node/bin${
 
 ## Brew
 alias brew@upd='brew cu -af --cleanup --include-mas && brew upgrade'
-alias brew@dump='brew bundle dump --force'
+alias brew@dump='brew bundle dump --formula --tap --force --file="${HOME}/.brewfile"; brew bundle dump --cask --mas --force --file="${HOME}/.caskfile"'
 
 ## MacOS dock stuff
 alias dock@reset='defaults write com.apple.dock tilesize -int 60 && killall Dock'
@@ -103,7 +103,6 @@ alias bat='f() { command bat "$@" 2>/dev/null; [[ $? == 0 ]] || { bati "$@" }; r
 #  -- Custom exports --
 export EDITOR='micro'
 export GPG_TTY="$(tty)"
-export HOMEBREW_BUNDLE_FILE='.brewfile'
 
 ## magic-enter
 MAGIC_ENTER_GIT_COMMAND='gst -u no'

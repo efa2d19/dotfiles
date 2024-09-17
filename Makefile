@@ -9,10 +9,13 @@ all: pkg link
 brew:
 	depends-on brew || curl -fsSL 'https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh' | bash
 
-pkg: brew-pkg
+pkg: brew-pkg brew-apps
 
 brew-pkg: brew
-	brew bundle install --file="$(DOTFILES_DIR)/config/home/.brewfile"
+	brew bundle install --file="$(DOTFILES_DIR)/install/Brewfile"
+
+brew-apps: brew
+	brew bundle install --file="$(DOTFILES_DIR)/install/Caskfile"
 
 ensure-stow: brew
 	depends-on stow || brew install stow

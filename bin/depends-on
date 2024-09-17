@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+local failed
+
+for item in "$@"; do
+	type "$item" &>/dev/null || { echo "[!] No ${item} installed" && failed=1 } 
+done
+
+[[ -z $failed ]] || { exit 1 }

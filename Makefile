@@ -4,7 +4,7 @@ PATH := $(DOTFILES_DIR)/bin:$(PATH)
 
 .PHONY: all
 
-all: pkg link
+all: sys pkg link dock
 
 brew:
 	depends-on brew || curl -fsSL 'https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh' | bash
@@ -25,3 +25,13 @@ link: ensure-stow
 
 unlink: ensure-stow
 	./config/dotsetup -vd --uninstall
+
+sys:
+ifdef NO_SYSTEM_RENAME
+	./system/settings --no-rename
+else
+	./system/settings
+endif
+
+dock:
+	./system/dock -c

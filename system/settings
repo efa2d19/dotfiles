@@ -1,0 +1,279 @@
+#!/usr/bin/env zsh
+
+###############################################################################
+# Special thanks to                                                           #
+# https://github.com/webpro/dotfiles/                                        #
+##############################################################################
+
+local help no_rename
+
+local DEFAULT_COMPUTER_NAME='wah'
+local DEFAULT_LOCALE='en_US'
+local DEFAULT_MEASUREMENT_UNITS='Centimeters'
+local DEFAULT_LANGUAGES=(
+	'en-US'
+	'ru-US'
+)
+
+local usage=(
+	'Sets default settings for mac\n'
+	'Usage:'
+	'\t./settings [-h|--help]'
+	'\t./settings [-r|--no-rename]'
+)
+
+zparseopts -D -F -- \
+	{h,-help}=help \
+	{r,-no-rename}=no_rename ||
+	{ print -l "${usage[@]}" && exit 1 }
+
+[[ -z $help ]] || { print -l "${usage[@]}" && exit 0 }
+
+###############################################################################
+# Computer & Host name                                                        #
+###############################################################################
+
+# Set computer name (as done via System Preferences → Sharing)
+[[ -z $no_rename ]] || {
+	sudo scutil --set ComputerName "${COMPUTER_NAME:-$DEFAULT_COMPUTER_NAME}"
+	sudo scutil --set HostName "${COMPUTER_NAME:-$DEFAULT_COMPUTER_NAME}"
+	sudo scutil --set LocalHostName "${COMPUTER_NAME:-$DEFAULT_COMPUTER_NAME}"
+	sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "${COMPUTER_NAME:-$DEFAULT_COMPUTER_NAME}"
+}
+
+###############################################################################
+# Localization                                                                #
+###############################################################################
+
+# Set language and text formats
+defaults write NSGlobalDomain AppleLanguages -array "${LANGUAGES[@]:-$DEFAULT_LANGUAGES[@]}"
+defaults write NSGlobalDomain AppleLocale -string "${LOCALE:-$DEFAULT_LOCALE}"
+defaults write NSGlobalDomain AppleMeasurementUnits -string "${MEASUREMENT_UNITS:-$DEFAULT_MEASUREMENT_UNITS}"
+defaults write NSGlobalDomain AppleMetricUnits -bool true
+
+# Using systemsetup might give Error:-99, can be ignored (commands still work)
+# systemsetup manpage: https://ss64.com/osx/systemsetup.html
+
+# Set the time zone
+sudo defaults write /Library/Preferences/com.apple.timezone.auto Active -bool YES
+sudo systemsetup -setusingnetworktime on || true
+
+###############################################################################
+# System                                                                      #
+###############################################################################
+
+# Disable audio feedback when volume is changed
+defaults write com.apple.sound.beep.feedback -bool false
+
+# Disable the sound effects on boot
+sudo nvram SystemAudioVolume=' '
+sudo nvram StartupMute=%01
+
+# Menu bar: show battery percentage
+defaults write com.apple.menuextra.battery ShowPercent YES
+
+# Disable opening and closing window animations
+defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
+
+# Increase window resize speed for Cocoa applications
+defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
+
+# Save to disk (not to iCloud) by default
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+# Automatically quit printer app once the print jobs complete
+defaults write com.apple.print.PrintingPrefs 'Quit When Finished' -bool true
+
+# Disable the crash reporter
+defaults write com.apple.CrashReporter DialogType -string 'none'
+
+###############################################################################
+# Keyboard & Input                                                            #
+###############################################################################
+
+# Disable smart quotes and dashes as they’re annoying when typing code
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
+# Enable full keyboard access for all controls
+# (e.g. enable Tab in modal dialogs)
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+
+# Disable press-and-hold for keys in favor of key repeat
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
+# Set a blazingly fast keyboard repeat rate
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+
+# Automatically illuminate built-in MacBook keyboard in low light
+defaults write com.apple.BezelServices kDim -bool true
+
+# Turn off keyboard illumination when computer is not used for 1.5 minutes
+defaults write com.apple.BezelServices kDimTime -int 90
+
+# Enable auto-correct
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool true
+
+###############################################################################
+# Trackpad, mouse, Bluetooth accessories                                      #
+###############################################################################
+
+# Trackpad: swipe between pages with three fingers
+defaults write NSGlobalDomain AppleEnableSwipeNavigateWithScrolls -bool true
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerHorizSwipeGesture -int 1
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 1
+
+###############################################################################
+# Screen                                                                      #
+###############################################################################
+
+# Require password immediately after sleep or screen saver begins
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+# Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
+defaults write com.apple.screencapture type -string 'png'
+
+# Disable shadow in screenshots
+defaults write com.apple.screencapture disable-shadow -bool true
+
+###############################################################################
+# Finder                                                                      #
+###############################################################################
+
+# Finder: allow quitting via ⌘ + Q; doing so will also hide desktop icons
+defaults write com.apple.finder QuitMenuItem -bool false
+
+# Finder: show hidden files by default
+defaults write com.apple.finder AppleShowAllFiles -bool true
+
+# Finder: show all filename extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Finder: show status bar
+defaults write com.apple.finder ShowStatusBar -bool false
+
+# Finder: show path bar
+defaults write com.apple.finder ShowPathbar -bool true
+
+# Finder: allow text selection in Quick Look
+defaults write com.apple.finder QLEnableTextSelection -bool true
+
+# Display full POSIX path as Finder window title
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool false
+
+# Keep folders on top when sorting by name
+defaults write com.apple.finder _FXSortFoldersFirst -bool true
+
+# When performing a search, search the current folder by default
+defaults write com.apple.finder FXDefaultSearchScope -string 'SCcf'
+
+# Disable the warning when changing a file extension
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+# Avoid creating .DS_Store files on network or USB volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+# Use AirDrop over every interface.
+defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
+
+# Always open everything in Finder's list view.
+# Use list view in all Finder windows by default
+# Four-letter codes for the other view modes: `icnv`, `Nlsv`, `clmv`, `Flwv`
+defaults write com.apple.finder FXPreferredViewStyle -string 'clmv'
+
+# Disable the warning before emptying the Trash
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
+
+# Expand the following File Info panes:
+# “General”, “Open with”, and “Sharing & Permissions”
+defaults write com.apple.finder FXInfoPanesExpanded -dict General -bool true OpenWith -bool true Privileges -bool true
+
+###############################################################################
+# Dock                                                                        #
+###############################################################################
+
+# Show indicator lights for open applications in the Dock
+defaults write com.apple.dock show-process-indicators -bool true
+
+# Animate opening applications from the Dock
+defaults write com.apple.dock launchanim -bool true
+
+# Do not automatically hide and show the Dock
+defaults write com.apple.dock autohide -bool false
+
+# No bouncing icons
+defaults write com.apple.dock no-bouncing -bool true
+
+# Disable hot corners
+defaults write com.apple.dock wvous-tl-corner -int 0
+defaults write com.apple.dock wvous-tr-corner -int 0
+defaults write com.apple.dock wvous-bl-corner -int 0
+defaults write com.apple.dock wvous-br-corner -int 0
+
+# Don't show recently used applications in the Dock
+defaults write com.Apple.Dock show-recents -bool false
+
+#
+defaults write com.apple.dock tilesize -int 60
+defaults write com.apple.dock size-immutable -bool yes
+defaults write com.apple.dock workspaces-swoosh-animation-off -bool yes
+
+###############################################################################
+# Activity Monitor                                                            #
+###############################################################################
+
+# Show the main window when launching Activity Monitor
+defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
+
+# Show all processes in Activity Monitor
+defaults write com.apple.ActivityMonitor ShowCategory -int 0
+
+# Sort Activity Monitor results by CPU usage
+defaults write com.apple.ActivityMonitor SortColumn -string 'CPUUsage'
+defaults write com.apple.ActivityMonitor SortDirection -int 0
+
+###############################################################################
+# Software Updates                                                            #
+###############################################################################
+
+# Enable the automatic update check
+defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+
+# Check for software updates weekly (`dot update` includes software updates)
+defaults write com.apple.SoftwareUpdate ScheduleFrequency -string 7
+
+# Do not download newly available updates in background
+defaults write com.apple.SoftwareUpdate AutomaticDownload -bool false
+
+# Install System data files & security updates
+defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -bool true
+
+# Turn off app auto-update
+defaults write com.apple.commerce AutoUpdate -bool false
+
+# Disallow the App Store to reboot machine on macOS updates
+defaults write com.apple.commerce AutoUpdateRestartRequired -bool false
+
+###############################################################################
+# Kill affected applications                                                  #
+###############################################################################
+
+local kill_list=(
+	'Address Book'
+	'Calendar'
+	'Contacts'
+	'Dock'
+	'Finder'
+	'Safari'
+	'SystemUIServer'
+	'iCal'
+)
+
+for app in "${kill_list[@]}"; do
+  killall "${app}" &>/dev/null
+done
+
+exit 0

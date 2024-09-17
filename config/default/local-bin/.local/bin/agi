@@ -30,7 +30,7 @@ bat \
 	--style=numbers \
 	--color=always \
 	--highlight-line {2} \
-	{1} 
+	{1}
 EOF
 )
 

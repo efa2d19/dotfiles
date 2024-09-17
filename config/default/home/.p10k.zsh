@@ -16,7 +16,7 @@
   local white='7'
   local grey_d='240'
   local grey_l='244'
-  
+
   unset -m '(POWERLEVEL9K_*|DEFAULT_USER)~POWERLEVEL9K_GITSTATUS_DIR'
 
   autoload -Uz is-at-least && is-at-least 5.1 || return

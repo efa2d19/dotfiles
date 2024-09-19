@@ -37,7 +37,7 @@ function main() {
 	fd -t f -e apk -IH --max-depth 10 |
 	fzf \
 		--multi \
-		--preview 'stat -f%Sm {}' \
+		--preview 'stat -c %Y {} | xargs -I {} date -d @{}' \
 		--preview-window "right:$(( $(tput cols) / 4 * 3 )):border-vertical" \
 		--bind "ctrl-\\:change-preview-window($(( $(tput cols) / 5 ))|$(( $(tput cols) / 4 * 3 )))" |
 	xargs -I {} adb install -d -r {}

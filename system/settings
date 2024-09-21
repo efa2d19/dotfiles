@@ -216,9 +216,13 @@ defaults write com.apple.dock wvous-br-corner -int 0
 # Don't show recently used applications in the Dock
 defaults write com.Apple.Dock show-recents -bool false
 
-#
+# Change dock size
 defaults write com.apple.dock tilesize -int 60
+
+# Make dock unrezizable
 defaults write com.apple.dock size-immutable -bool yes
+
+# Disable dock animation
 defaults write com.apple.dock workspaces-swoosh-animation-off -bool yes
 
 ###############################################################################

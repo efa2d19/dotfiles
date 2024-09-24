@@ -1,0 +1,34 @@
+let mapleader = " "
+
+set nu
+set relativenumber
+set cursorline
+set expandtab
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+set ignorecase
+set smartcase
+set clipboard=unnamedplus
+set mouse=a
+set wrap
+set linebreak
+set showbreak=↪
+set breakindent
+set list
+
+set NERDTree
+let g:NERDTreeMapOpenRecursively='E'
+
+map <Leader>ff <Action>(GotoFile)
+map <Leader>fw <Action>(FindInPath)
+map <Leader>fr <Action>(RecentFiles)
+map <Leader>fR <Action>(RecentLocations)
+map <Leader>fs <Action>(GotoSymbol)
+map <Leader>fa <Action>(GotoAction)
+map <Leader>/ <Action>(CommentByLineComment)
+vmap <Leader>/ <Action>(CommentByLineComment)
+map <Leader>e <Action>(ActivateProjectToolWindow)
+
+map gi <Action>(GotoImplementation)
+

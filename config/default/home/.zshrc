@@ -101,7 +101,7 @@ alias git@prune='git fetch --prune && git branch -vv | awk "/: gone]/ && !/^\*/ 
 alias bat='f() { command bat "$@" 2>/dev/null; [[ $? == 0 ]] || { bati "$@" }; return "$?" }; f'
 
 #  -- Custom exports --
-export EDITOR='micro'
+export EDITOR='nvim'
 export GPG_TTY="$(tty)"
 
 ## magic-enter

@@ -29,5 +29,8 @@ unlink: ensure-stow
 sys:
 	./system/settings
 
-dock:
+dockutil: brew
+	depends-on dockutil || brew install dockutil
+
+dock: dockutil
 	./system/dock -c

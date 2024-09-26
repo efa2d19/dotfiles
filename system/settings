@@ -34,7 +34,7 @@ zparseopts -D -F -- \
 ###############################################################################
 
 # Set computer name (as done via System Preferences → Sharing)
-[[ -n $no_rename ]] || {
+[[ -n $no_rename || -n $NO_SYSTEM_RENAME ]] || {
 	sudo scutil --set ComputerName "${COMPUTER_NAME:-$DEFAULT_COMPUTER_NAME}"
 	sudo scutil --set HostName "${COMPUTER_NAME:-$DEFAULT_COMPUTER_NAME}"
 	sudo scutil --set LocalHostName "${COMPUTER_NAME:-$DEFAULT_COMPUTER_NAME}"

@@ -27,11 +27,7 @@ unlink: ensure-stow
 	./config/dotsetup -vd --uninstall
 
 sys:
-ifdef NO_SYSTEM_RENAME
-	./system/settings --no-rename
-else
 	./system/settings
-endif
 
 dock:
 	./system/dock -c

@@ -30,5 +30,7 @@ map <Leader>/ <Action>(CommentByLineComment)
 vmap <Leader>/ <Action>(CommentByLineComment)
 map <Leader>e <Action>(ActivateProjectToolWindow)
 
-map gi <Action>(GotoImplementation)
-
+map <leader>gi <Action>(GotoImplementation)
+map <leader>gd <Action>(GotoDeclaration)
+map <leader>gD <Action>(GotoSuperMethod)
+map <leader>rn <Action>(RenameElement)

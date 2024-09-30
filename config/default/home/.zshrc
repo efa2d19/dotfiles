@@ -102,6 +102,7 @@ alias bat='f() { command bat "$@" 2>/dev/null; [[ $? == 0 ]] || { bati "$@" }; r
 
 #  -- Custom exports --
 export EDITOR='nvim'
+export MANPAGER='nvim +Man!'
 export GPG_TTY="$(tty)"
 
 ## magic-enter

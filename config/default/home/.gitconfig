@@ -41,7 +41,7 @@
 	tool = intellij
 
 [mergetool "intellij"]
-	cmd = studio merge \
+	cmd = idea merge \
 		"$(pwd)/$LOCAL" \
 		"$(pwd)/$REMOTE" \
 		"$(pwd)/$BASE" \

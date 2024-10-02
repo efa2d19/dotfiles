@@ -85,6 +85,7 @@ alias android@bg='emulator @phone -writable-system -feature -Vulkan -no-window -
 
 ## Misc
 alias studio@here='studio "$(pwd)"'
+alias idea@here='idea "$(pwd)"'
 alias resetComp='rm ~/.zcompdump*; compinit'
 
 ## Git

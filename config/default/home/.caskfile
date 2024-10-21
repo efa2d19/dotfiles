@@ -1,6 +1,7 @@
 cask "aldente"
 cask "android-commandlinetools"
 cask "android-platform-tools"
+cask "arc"
 cask "charles"
 cask "cyberduck"
 cask "dbeaver-community"

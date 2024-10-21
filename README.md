@@ -2,7 +2,7 @@
 
 ## 🔎 Overview
 
-Yet another personal dotfiles repo.
+Yet another personal dotfiles repo
 
 ## 💡 Usage options
 
@@ -10,7 +10,7 @@ Yet another personal dotfiles repo.
   > Executes all script below, aka `make all`
 
 - `make brew`
-  > Checks if brew is isntalled, otherwise installs it using online installer
+  > Checks if brew is installed, otherwise installs it using online installer
 
 - `make pkg`
   > Installs brew formulaes, casks, and mas apps\
@@ -34,7 +34,7 @@ Yet another personal dotfiles repo.
 
 - `make sys`
   > Sets up default system settings\
-  > With NO_SYSTEM_RENAME end set doesn't rename pc\
+  > With NO_SYSTEM_RENAME env doesn't rename pc\
   > Other envs: COMPUTER_NAME, LANGUAGES, LOCALE, MEASUREMENT_UNITS
 
 - `make dock`

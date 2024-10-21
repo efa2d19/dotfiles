@@ -4,7 +4,7 @@ PATH := $(DOTFILES_DIR)/bin:$(PATH)
 
 .PHONY: all
 
-all: sys pkg link dock
+all: sys pkg link dock zsh
 
 brew:
 	depends-on brew || curl -fsSL 'https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh' | bash
@@ -34,3 +34,7 @@ dockutil: brew
 
 dock: dockutil
 	./system/dock -c
+
+zsh:
+	./system/zsh
+

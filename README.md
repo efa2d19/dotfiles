@@ -40,6 +40,9 @@ Yet another personal dotfiles repo.
 - `make dock`
   > Removes all items in dock and adds default ones
 
+- `make zsh`
+  > Checks if oh-my-zsh is installed, otherwise installs it with p10k and some plugins
+
 ## 📝 License
 
 All set to go under the [Apache-2.0 License](/LICENSE). Use it, modify it, share it.

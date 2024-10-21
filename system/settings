@@ -87,13 +87,30 @@ defaults write com.apple.print.PrintingPrefs 'Quit When Finished' -bool true
 # Disable the crash reporter
 defaults write com.apple.CrashReporter DialogType -string 'none'
 
+# Display crash reports in Notification Center (instead of dialog)
+defaults write com.apple.CrashReporter UseUNC 1
+
+# Notification banner on screen time
+# Default 5 seconds
+defaults write com.apple.notificationcenterui bannerTime 3
+
+# Use Dark menu bar and Dock
+defaults write NSGlobalDomain AppleInterfaceStyle -string 'Dark'
+
+# Disable Spotlight indexing
+sudo mdutil -a -i off
+
+# Allow Touch ID while screen sharing
+defaults write com.apple.security.authorization ignoreArd -bool TRUE
+
 ###############################################################################
 # Keyboard & Input                                                            #
 ###############################################################################
 
-# Disable smart quotes and dashes as they’re annoying when typing code
+# Disable smart quotes, dashes, and auto-capitalization
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
 
 # Enable full keyboard access for all controls
 # (e.g. enable Tab in modal dialogs)
@@ -137,6 +154,13 @@ defaults write com.apple.screencapture type -string 'png'
 
 # Disable shadow in screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
+
+# Disable display dim on battery
+sudo pmset -b lessbright 0
+
+# Set display sleep to 2 minutes from battery and 3 minutes from the wall
+sudo pmset -b displaysleep 2
+sudo pmset -c displaysleep 3
 
 ###############################################################################
 # Finder                                                                      #
@@ -225,6 +249,9 @@ defaults write com.apple.dock size-immutable -bool yes
 # Disable dock animation
 defaults write com.apple.dock workspaces-swoosh-animation-off -bool yes
 
+# Don’t automatically rearrange Spaces based on most recent use
+defaults write com.apple.dock mru-spaces -bool false
+
 ###############################################################################
 # Activity Monitor                                                            #
 ###############################################################################
@@ -281,3 +308,4 @@ for app in "${kill_list[@]}"; do
 done
 
 exit 0
+

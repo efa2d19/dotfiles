@@ -4,7 +4,7 @@ PATH := $(DOTFILES_DIR)/bin:$(PATH)
 
 .PHONY: all
 
-all: sys pkg link dock zsh
+all: sys pkg link dock zsh xcode-clt
 
 brew:
 	depends-on brew || curl -fsSL 'https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh' | bash
@@ -34,6 +34,9 @@ dockutil: brew
 
 dock: dockutil
 	./system/dock -c
+
+xcode-clt:
+	xcode-select --install || true
 
 zsh:
 	./system/zsh

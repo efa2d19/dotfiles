@@ -43,6 +43,9 @@ Yet another personal dotfiles repo
 - `make zsh`
   > Checks if oh-my-zsh is installed, otherwise installs it with p10k and some plugins
 
+- `make xcode-clt`
+  > Installs xcode clt
+
 ## 📝 License
 
 All set to go under the [Apache-2.0 License](/LICENSE). Use it, modify it, share it.

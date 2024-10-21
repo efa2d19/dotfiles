@@ -67,12 +67,6 @@ ctrl + alt + cmd - u : yabai -m window --toggle split
 # replace and hide
 ctrl + alt + cmd - o : yabai -m window --stack next
 
-# move window to prev and next space
-ctrl + alt + cmd - 0x21 : yabai -m window --space prev && \
-						  osascript -e 'tell application "System Events" to key code 123 using control down'
-ctrl + alt + cmd - 0x1E : yabai -m window --space next && \
-						  osascript -e 'tell application "System Events" to key code 124 using control down'
-
 # move window to space
 hyper - 1 : yabai -m window --space 1
 hyper - 2 : yabai -m window --space 2

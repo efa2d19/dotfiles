@@ -12,9 +12,6 @@ export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/node@20/bin${PATH+:$PATH}"
 export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/python@3.12/bin${PATH+:$PATH}"
 export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/curl/bin${PATH+:$PATH}"
 
-## Python 2.X
-export PATH="$HOME/.pyenv/versions/2.7.18/bin${PATH+:$PATH}"
-
 ## Android platform tools
 export PATH="${ANDROID_HOME:-$ANDROID_SDK_ROOT}/emulator${PATH+:$PATH}"
 export PATH="${ANDROID_HOME:-$ANDROID_SDK_ROOT}/platform-tools${PATH+:$PATH}"

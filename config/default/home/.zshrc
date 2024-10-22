@@ -57,6 +57,7 @@ alias node@latest='export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/node/bin${
 ## Brew
 alias brew@upd='brew cu -af --cleanup --include-mas && brew upgrade'
 alias brew@dump='brew bundle dump --formula --tap --force --file="${HOME}/.brewfile"; brew bundle dump --cask --mas --force --file="${HOME}/.caskfile"'
+alias brew@cleanup='temp="$(mktemp)"; cat "${HOME}/.brewfile" "${HOME}/.caskfile" > "$temp"; brew bundle --cleanup --force --file="$temp"; rm "$temp"'
 
 ## MacOS dock stuff
 alias dock@reset='defaults write com.apple.dock tilesize -int 60 && killall Dock'

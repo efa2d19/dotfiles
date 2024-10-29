@@ -77,9 +77,9 @@ hyper - 6 : yabai -m window --space 6
 
 # -- Custom --
 
-cmd + shift - b : ~/.local/bin/skhd/bitwarden.sh
-ctrl - f5 :  ~/.local/bin/skhd/inputmute.sh
-ctrl - f9 : ~/.local/bin/skhd/outputswitch.sh
+cmd + shift - b : ~/.local/bin/skhd/bitwarden
+ctrl - f5 :  ~/.local/bin/skhd/inputmute
+ctrl - f9 : ~/.local/bin/skhd/outputswitch
 
 # -- Extensions --
 

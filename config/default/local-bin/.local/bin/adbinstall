@@ -3,44 +3,44 @@
 local help
 
 local usage=(
-	'Usage:'
-	'	adbinstall [-h|--help]'
+    'Usage:'
+    '\tadbinstall [-h|--help]'
 )
 
 local deps_list=(
-	'adb'
-	'fd'
-	'fzf'
+    'adb'
+    'fd'
+    'fzf'
 )
 
 zparseopts -D -F -- \
-	{h,-help}=help ||
-	{ print -l "${usage[@]}" && exit 1 }
+    {h,-help}=help ||
+    { print -l "${usage[@]}" && exit 1 }
 
 [[ -z $help ]] || { print -l "${usage[@]}" && exit 0 }
 
 function check_deps() {
-	[[ ${#@} != 0 ]] || { echo '[!] check_deps :: none passed' && exit 2 }
+    [[ ${#@} != 0 ]] || { echo '[!] check_deps :: none passed' && exit 2 }
 
-	local failed
+    local failed
 
-	for dep in "$@"; do
-		type "$dep" &>/dev/null || { echo "[!] No $dep installed" && failed=1 }
-	done
+    for dep in "$@"; do
+        type "$dep" &>/dev/null || { echo "[!] No $dep installed" && failed=1 }
+    done
 
-	[[ -z $failed ]] || { exit 2 }
+    [[ -z $failed ]] || { exit 2 }
 }
 
 function main() {
-	check_deps "${deps_list[@]}"
+    check_deps "${deps_list[@]}"
 
-	fd -t f -e apk -IH --max-depth 10 |
-	fzf \
-		--multi \
-		--preview 'stat -c %Y {} | xargs -I {} date -d @{}' \
-		--preview-window "right:$(( $(tput cols) / 4 * 3 )):border-vertical" \
-		--bind "ctrl-\\:change-preview-window($(( $(tput cols) / 5 ))|$(( $(tput cols) / 4 * 3 )))" |
-	xargs -I {} adb install -d -r {}
+    fd -t f -e apk -IH --max-depth 10 |
+    fzf \
+        --multi \
+        --preview 'stat -c %Y {} | xargs -I {} date -d @{}' \
+        --preview-window "right:$(( $(tput cols) / 4 * 3 )):border-vertical" \
+        --bind "ctrl-\\:change-preview-window($(( $(tput cols) / 5 ))|$(( $(tput cols) / 4 * 3 )))" |
+    xargs -I {} adb install -d -r {}
 }
 
 main

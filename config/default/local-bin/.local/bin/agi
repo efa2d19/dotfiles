@@ -3,20 +3,20 @@
 local help query
 
 local usage=(
-	'The silver searcher  wrapped in fzf\n'
-	'Usage:'
-	'\tagi [-h|--help]'
-	'\tagi <value-to-be-searched>'
+    'The silver searcher  wrapped in fzf\n'
+    'Usage:'
+    '\tagi [-h|--help]'
+    '\tagi <value-to-be-searched>'
 )
 
 local deps=(
-	'fzf'
-	'ag'
+    'fzf'
+    'ag'
 )
 
 zparseopts -D -F -- \
-	{h,-help}=help ||
-	{ print -l "${usage[@]}" && exit 1 }
+    {h,-help}=help ||
+    { print -l "${(@)usage}" && exit 1 }
 
 [[ -z $help ]] || { print -l "${usage[@]}" && exit 0 }
 [[ -n $@ ]] && { query="$@" } || { print -l '[!] No search query passed' "${usage[@]}" && exit 1 }
@@ -27,10 +27,10 @@ local preview_width_folded="$(( $width / 5 ))"
 
 local fzf_preview=$(cat <<'EOF'
 bat \
-	--style=numbers \
-	--color=always \
-	--highlight-line {2} \
-	{1}
+    --style=numbers \
+    --color=always \
+    --highlight-line {2} \
+    {1}
 EOF
 )
 
@@ -45,25 +45,25 @@ EOF
 )
 
 function main() {
-	ag --nobreak --noheading "$query" |
-	fzf \
-		--delimiter ':' \
-		--with-nth 1,2 \
-		--preview="${fzf_preview}" \
-		--preview-window="${fzf_preview_window}" \
-		--bind="${fzf_fold_bind}"
+    ag --nobreak --noheading "$query" |
+    fzf \
+        --delimiter ':' \
+        --with-nth 1,2 \
+        --preview="${fzf_preview}" \
+        --preview-window="${fzf_preview_window}" \
+        --bind="${fzf_fold_bind}"
 }
 
 function check_deps() {
-	[[ ${#@} != 0 ]] || { echo '[!] No dependencies has been passed to check_deps' && exit 2 }
+    [[ ${#@} != 0 ]] || { echo '[!] No dependencies has been passed to check_deps' && exit 2 }
 
-	local failed
+    local failed
 
-	for dep in "$@"; do
-		type "$dep" >&/dev/null || { echo "[!] No ${dep} installed" && failed=1 }
-	done
+    for dep in "$@"; do
+        type "$dep" >&/dev/null || { echo "[!] No ${dep} installed" && failed=1 }
+    done
 
-	[[ -z $failed ]] || { exit 2 }
+    [[ -z $failed ]] || { exit 2 }
 }
 
 check_deps "${deps[@]}"

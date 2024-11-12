@@ -11,21 +11,21 @@ local DEFAULT_COMPUTER_NAME='wah'
 local DEFAULT_LOCALE='en_US'
 local DEFAULT_MEASUREMENT_UNITS='Centimeters'
 local DEFAULT_LANGUAGES=(
-	'en-US'
-	'ru-US'
+    'en-US'
+    'ru-US'
 )
 
 local usage=(
-	'Sets default settings for mac\n'
-	'Usage:'
-	'\t./settings [-h|--help]'
-	'\t./settings [-r|--no-rename]'
+    'Sets default settings for mac\n'
+    'Usage:'
+    '\tsettings [-h|--help]'
+    '\tsettings [-r|--no-rename]'
 )
 
 zparseopts -D -F -- \
-	{h,-help}=help \
-	{r,-no-rename}=no_rename ||
-	{ print -l "${usage[@]}" && exit 1 }
+    {h,-help}=help \
+    {r,-no-rename}=no_rename ||
+    { print -l "${usage[@]}" && exit 1 }
 
 [[ -z $help ]] || { print -l "${usage[@]}" && exit 0 }
 
@@ -35,10 +35,10 @@ zparseopts -D -F -- \
 
 # Set computer name (as done via System Preferences → Sharing)
 [[ -n $no_rename || -n $NO_SYSTEM_RENAME ]] || {
-	sudo scutil --set ComputerName "${COMPUTER_NAME:-$DEFAULT_COMPUTER_NAME}"
-	sudo scutil --set HostName "${COMPUTER_NAME:-$DEFAULT_COMPUTER_NAME}"
-	sudo scutil --set LocalHostName "${COMPUTER_NAME:-$DEFAULT_COMPUTER_NAME}"
-	sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "${COMPUTER_NAME:-$DEFAULT_COMPUTER_NAME}"
+    sudo scutil --set ComputerName "${COMPUTER_NAME:-$DEFAULT_COMPUTER_NAME}"
+    sudo scutil --set HostName "${COMPUTER_NAME:-$DEFAULT_COMPUTER_NAME}"
+    sudo scutil --set LocalHostName "${COMPUTER_NAME:-$DEFAULT_COMPUTER_NAME}"
+    sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "${COMPUTER_NAME:-$DEFAULT_COMPUTER_NAME}"
 }
 
 ###############################################################################
@@ -293,19 +293,18 @@ defaults write com.apple.commerce AutoUpdateRestartRequired -bool false
 ###############################################################################
 
 local kill_list=(
-	'Address Book'
-	'Calendar'
-	'Contacts'
-	'Dock'
-	'Finder'
-	'Safari'
-	'SystemUIServer'
-	'iCal'
+    'Address Book'
+    'Calendar'
+    'Contacts'
+    'Dock'
+    'Finder'
+    'Safari'
+    'SystemUIServer'
+    'iCal'
 )
 
 for app in "${kill_list[@]}"; do
-  killall "${app}" &>/dev/null
+    killall "${app}" &>/dev/null
 done
 
 exit 0
-

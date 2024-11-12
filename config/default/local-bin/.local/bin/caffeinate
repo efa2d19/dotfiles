@@ -3,22 +3,22 @@
 local help 
 
 local description=(
-	'Caffeinate wrapper using minutes'
-	'\nUsed opts:'
-	'	-d=No display sleep'
-	'	-m=No disk sleep'
-	'	-i=No system idle\n'
+    'Caffeinate wrapper using minutes'
+    '\nUsed opts:'
+    '\t-d=No display sleep'
+    '\t-m=No disk sleep'
+    '\t-i=No system idle\n'
 )
 
 local usage=(
-	'Usage:'
-	'	caffeinate [-h|--help]'
-	'	caffeinate <minutes>'
+    'Usage:'
+    '\tcaffeinate [-h|--help]'
+    '\tcaffeinate <minutes>'
 )
 
 zparseopts -D -F -- \
-	{h,-help}=help ||
-	{ print -l "${usage[@]}" && exit 1 }
+    {h,-help}=help ||
+    { print -l "${usage[@]}" && exit 1 }
 
 [[ -z $help ]] || { print -l "${description[@]}" "${usage[@]}" && exit 0 }
 

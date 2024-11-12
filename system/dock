@@ -8,26 +8,26 @@
 local help clear dock_items
 
 local usage=(
-	'Removes all items from Dock and all default one'
-	'Plus additional ones if specified'
-	'Usage:'
-	'\tdock [-h|--help]'
-	'\tdock [-c|--clear] <vararg additional_items: String>'
+    'Removes all items from Dock and all default one'
+    'Plus additional ones if specified'
+    'Usage:'
+    '\tdock [-h|--help]'
+    '\tdock [-c|--clear] <vararg additional_items: String>'
 )
 
 zparseopts -D -F -- \
-	{h,-help}=help \
-	{c,-clear}=clear ||
-	{ print -l "${usage[@]}" && exit 1 }
+    {h,-help}=help \
+    {c,-clear}=clear ||
+    { print -l "${usage[@]}" && exit 1 }
 
 [[ -z $help ]] || { print -l "${usage[@]}" && exit 0 }
 
 local dock_items=(
-	'/System/Applications/Messages.app'
-	'/Applications/Arc.app'
-	'/System/Applications/Music.app'
-	'/Applications/Warp.app'
-	'/System/Applications/System Settings.app'
+    '/System/Applications/Messages.app'
+    '/Applications/Arc.app'
+    '/System/Applications/Music.app'
+    '/Applications/Warp.app'
+    '/System/Applications/System Settings.app'
 )
 
 [[ ${#@} == 0 ]] || { dock_items+=("$@") }
@@ -37,7 +37,7 @@ local dock_items=(
 
 # Add custom ones
 for item in "${dock_items[@]}"; do
-	dockutil --no-restart --add "${item}"
+    dockutil --no-restart --add "$item"
 done
 
 # Restart dock

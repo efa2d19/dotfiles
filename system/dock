@@ -18,9 +18,9 @@ local usage=(
 zparseopts -D -F -- \
     {h,-help}=help \
     {c,-clear}=clear ||
-    { print -l "${usage[@]}" && exit 1 }
+    { print -l "${(@)usage}" && exit 1 }
 
-[[ -z $help ]] || { print -l "${usage[@]}" && exit 0 }
+[[ -z $help ]] || { print -l "${(@)usage}" && exit 0 }
 
 local dock_items=(
     '/System/Applications/Messages.app'
@@ -36,7 +36,7 @@ local dock_items=(
 [[ -z $clear ]] || dockutil --no-restart --remove all
 
 # Add custom ones
-for item in "${dock_items[@]}"; do
+for item in "${(@)dock_items}"; do
     dockutil --no-restart --add "$item"
 done
 

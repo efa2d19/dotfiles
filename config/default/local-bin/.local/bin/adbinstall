@@ -15,9 +15,9 @@ local deps_list=(
 
 zparseopts -D -F -- \
     {h,-help}=help ||
-    { print -l "${usage[@]}" && exit 1 }
+    { print -l "${(@)usage}" && exit 1 }
 
-[[ -z $help ]] || { print -l "${usage[@]}" && exit 0 }
+[[ -z $help ]] || { print -l "${(@)usage}" && exit 0 }
 
 function check_deps() {
     [[ ${#@} != 0 ]] || { echo '[!] check_deps :: none passed' && exit 2 }
@@ -32,7 +32,7 @@ function check_deps() {
 }
 
 function main() {
-    check_deps "${deps_list[@]}"
+    check_deps "${(@)deps_list}"
 
     fd -t f -e apk -IH --max-depth 10 |
     fzf \

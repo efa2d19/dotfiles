@@ -18,9 +18,9 @@ local usage=(
 
 zparseopts -D -F -- \
     {h,-help}=help ||
-    { print -l "${usage[@]}" && exit 1 }
+    { print -l "${(@)usage}" && exit 1 }
 
-[[ -z $help ]] || { print -l "${description[@]}" "${usage[@]}" && exit 0 }
+[[ -z $help ]] || { print -l "${(@)description}" "${(@)usage}" && exit 0 }
 
 killall caffeinate &>/dev/null || true
 ( /usr/bin/caffeinate -dmi -t "$(( $1 * 60 ))" & disown ) &>/dev/null || true

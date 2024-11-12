@@ -25,9 +25,9 @@ local usage=(
 zparseopts -D -F -- \
     {h,-help}=help \
     {r,-no-rename}=no_rename ||
-    { print -l "${usage[@]}" && exit 1 }
+    { print -l "${(@)usage}" && exit 1 }
 
-[[ -z $help ]] || { print -l "${usage[@]}" && exit 0 }
+[[ -z $help ]] || { print -l "${(@)usage}" && exit 0 }
 
 ###############################################################################
 # Computer & Host name                                                        #
@@ -46,7 +46,7 @@ zparseopts -D -F -- \
 ###############################################################################
 
 # Set language and text formats
-defaults write NSGlobalDomain AppleLanguages -array "${LANGUAGES[@]:-$DEFAULT_LANGUAGES[@]}"
+defaults write NSGlobalDomain AppleLanguages -array "${(@)LANGUAGES:-${(@)DEFAULT_LANGUAGES}}"
 defaults write NSGlobalDomain AppleLocale -string "${LOCALE:-$DEFAULT_LOCALE}"
 defaults write NSGlobalDomain AppleMeasurementUnits -string "${MEASUREMENT_UNITS:-$DEFAULT_MEASUREMENT_UNITS}"
 defaults write NSGlobalDomain AppleMetricUnits -bool true
@@ -303,7 +303,7 @@ local kill_list=(
     'iCal'
 )
 
-for app in "${kill_list[@]}"; do
+for app in "${(@)kill_list}"; do
     killall "${app}" &>/dev/null
 done
 

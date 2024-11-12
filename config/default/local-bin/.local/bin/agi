@@ -18,8 +18,8 @@ zparseopts -D -F -- \
     {h,-help}=help ||
     { print -l "${(@)usage}" && exit 1 }
 
-[[ -z $help ]] || { print -l "${usage[@]}" && exit 0 }
-[[ -n $@ ]] && { query="$@" } || { print -l '[!] No search query passed' "${usage[@]}" && exit 1 }
+[[ -z $help ]] || { print -l "${(@)usage}" && exit 0 }
+[[ -n $@ ]] && { query="$@" } || { print -l '[!] No search query passed' "${(@)usage}" && exit 1 }
 
 local width="$(tput cols)"
 local preview_width="$(( $width / 4 * 3 ))"
@@ -66,5 +66,5 @@ function check_deps() {
     [[ -z $failed ]] || { exit 2 }
 }
 
-check_deps "${deps[@]}"
+check_deps "${(@)deps}"
 main

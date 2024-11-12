@@ -27,7 +27,7 @@ function check_deps() {
 }
 
 function main() {
-    check_deps "${deps_list[@]}"
+    check_deps "${(@)deps_list}"
 
     terminal-notifier \
         -title 'SwitchAudio' \

@@ -27,10 +27,11 @@ function check_deps() {
 }
 
 function main() {
-    check_deps "${deps_list[@]}"
+    check_deps "${(@)deps_list}"
 
     terminal-notifier \
         -title 'InputMute' \
+        -message "$(SwitchAudioSource -m toggle -t input)"
 }
 
 main

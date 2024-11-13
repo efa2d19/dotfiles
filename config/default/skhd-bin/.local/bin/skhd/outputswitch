@@ -26,7 +26,7 @@ function main() {
 }
 
 (
-    lock -st 0 8 || { exit 0 }
+    lockf -st 0 8 || { exit 0 }
     trap 'exec 8>&- && rm /tmp/outputswitch_lock' EXIT INT
     main
 ) 8>/tmp/outputswitch_lock

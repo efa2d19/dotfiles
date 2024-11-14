@@ -1,0 +1,119 @@
+#!/usr/bin/env zsh
+
+local help
+
+local usage=(
+    'Usage:'
+    '\tnice_ [-h|-help]'
+    '\n\tAlso uses $NICE_EXT to execute custom stuff'
+)
+
+local dependencies=(
+    'procs'
+)
+
+zparseopts -D -F -- \
+    {h,-help}=help ||
+    { print -l "${(@)usage}" && exit 1 }
+
+[[ -z $help ]] || { print -l "${(@)usage}" && exit 0 }
+
+function check_deps() {
+    local failed
+
+    for dep in "${(@)dependencies}"; do
+        type "$dep" &>/dev/null || { failed=1; echo "[!] No dependency - $dep" }
+    done
+
+    [[ -z $failed ]] || { exit 1 }
+}
+
+declare -A nice_arr
+
+local lowest_priority=(
+    'aldente.app'
+    'itsycal'
+    'bitwarden'
+    'keka'
+    'openinterminal'
+)
+
+local highest_priority=(
+    'raycast'
+)
+
+local ten_priority=(
+    'music'
+    'proxyman.ns'
+    'batteries.app'
+    'adb'
+)
+
+local eleven_priority=(
+    'proxyman.app'
+)
+
+local twelve_priority=(
+    'charles'
+)
+
+local minus_fifteen_priority=(
+    'warp.app'
+)
+
+function assembleAssociativeArray() {
+    nice_arr[20]="${(j:\n:)lowest_priority}"
+    nice_arr[-20]="${(j:\n:)highest_priority}"
+    nice_arr[10]="${(j:\n:)ten_priority}"
+    nice_arr[11]="${(j:\n:)eleven_priority}"
+    nice_arr[12]="${(j:\n:)twelve_priority}"
+    nice_arr[-15]="${(j:\n:)minus_fifteen_priority}"
+}
+
+function addExtension() {
+    [[ $NICE_EXT ]] || { return }
+    echo '[?] Extension found'
+
+    read -rA ext_arr <<< "$NICE_EXT"
+
+    for key val in "${(@kv)ext_arr}"; do
+
+        [[ -n ${nice_arr[$key]+_} ]] || {
+            nice_arr[$key]="$val"
+            echo "[?] No conflicts, added"
+            continue
+        }
+
+        nice_arr[$key]="${nice_arr[$key]}\n${val}"
+        echo "[?] Conflicts, concated"
+    done
+
+    unset ext_arr
+}
+
+function main() {
+    for key val in "${(@kv)nice_arr}"; do
+        (( $key >= 0 )) && { priority="+${key}" } || { priority="$key" }
+
+        for item in "${(@s/\n/)val}"; do
+            (
+                local item_pids=($(sudo procs $item --only pid --no-header | awk '{ print $1 }'))
+
+                [[ -n $item_pids ]] || {
+                    echo "[?] ${item} - empty"
+                    continue
+                }
+
+                echo "[?] ${item} - processing..."
+                sudo renice "$priority" -p "${(@)item_pids}"
+            ) &
+        done
+    done
+
+    wait
+}
+
+check_deps
+assembleAssociativeArray
+addExtension
+main

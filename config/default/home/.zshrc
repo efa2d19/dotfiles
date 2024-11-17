@@ -101,25 +101,6 @@ alias git@prune='git fetch --prune && git branch -vv | awk "/: gone]/ && !/^\*/ 
 
 ## Misc
 alias bat='f() { command bat "$@" 2>/dev/null; [[ $? == 0 ]] || { bati "$@" }; return "$?" }; f'
-
-#  -- Custom exports --
-export EDITOR='nvim'
-export MANPAGER='nvim +Man!'
-export GPG_TTY="$(tty)"
-
-## magic-enter
-MAGIC_ENTER_GIT_COMMAND='gst -u no'
-MAGIC_ENTER_OTHER_COMMAND='l'
-
-## Secretive
-export SSH_AUTH_SOCK="$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
-
-## fzf search w/ hidden files
-export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --no-ignore-vcs --follow --exclude .git --exclude .DS_Store'
-
-## Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
 # -- Eval stuff --
 _evalcache zoxide init zsh --cmd=cd
 _evalcache thefuck --alias

@@ -46,25 +46,11 @@ alias lg='eza -lagoL 3 --git --no-permissions --smart-group --color-scale=size'
 
 ## JAVA_HOME change
 alias java@list='/usr/libexec/java_home -V'
-alias java@11='export JAVA_HOME="$(/usr/libexec/java_home -v 11)"'
-alias java@17='export JAVA_HOME="$(/usr/libexec/java_home -v 17)"'
-
-## Node change
-alias node@20='export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/node@20/bin${PATH+:$PATH}"'
-alias node@21='export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/node@21/bin${PATH+:$PATH}"'
-alias node@latest='export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/node/bin${PATH+:$PATH}"'
 
 ## Brew
 alias brew@upd='brew cu -af --cleanup --include-mas && brew upgrade'
 alias brew@dump='brew bundle dump --formula --tap --force --file="${HOME}/.brewfile"; brew bundle dump --cask --mas --force --file="${HOME}/.caskfile"'
 alias brew@cleanup='temp="$(mktemp)"; cat "${HOME}/.brewfile" "${HOME}/.caskfile" > "$temp"; brew bundle --cleanup --force --file="$temp"; rm "$temp"'
-
-## MacOS dock stuff
-alias dock@reset='defaults write com.apple.dock tilesize -int 60 && killall Dock'
-alias dock@lock='defaults write com.apple.dock size-immutable -bool yes && killall Dock'
-alias dock@unlock='defaults write com.apple.dock size-immutable -bool no && killall Dock'
-alias dock@noanim='defaults write com.apple.dock workspaces-swoosh-animation-off -bool yes'
-alias dock@anim='defaults write com.apple.dock workspaces-swoosh-animation-off -bool no'
 
 ## adb
 alias adb@url='adb wait-for-device && adb shell am start -a android.intent.action.VIEW -d "$(clippaste)"'
@@ -99,8 +85,6 @@ alias gai='ga -i'
 alias git@update='git fetch --all &>/dev/null && git pull --all &>/dev/null && for remote in "$(git branch -r)"; do if [[ $remote != "->" ]]; then git branch --track "${remote#origin/}" "$remote" 2>&/dev/null; fi; done'
 alias git@prune='git fetch --prune && git branch -vv | awk "/: gone]/ && !/^\*/ {print \$1}" | xargs -r git branch -D'
 
-## Misc
-alias bat='f() { command bat "$@" 2>/dev/null; [[ $? == 0 ]] || { bati "$@" }; return "$?" }; f'
 # -- Eval stuff --
 _evalcache zoxide init zsh --cmd=cd
 _evalcache thefuck --alias

@@ -61,7 +61,7 @@ local minus_fifteen_priority=(
     'warp.app'
 )
 
-function assembleAssociativeArray() {
+function assemble_associative_array() {
     nice_arr[20]="${(j:\n:)lowest_priority}"
     nice_arr[-20]="${(j:\n:)highest_priority}"
     nice_arr[10]="${(j:\n:)ten_priority}"
@@ -70,7 +70,7 @@ function assembleAssociativeArray() {
     nice_arr[-15]="${(j:\n:)minus_fifteen_priority}"
 }
 
-function addExtension() {
+function add_extension() {
     [[ $NICE_EXT ]] || { return }
     echo '[?] Extension found'
 
@@ -114,6 +114,6 @@ function main() {
 }
 
 check_deps
-assembleAssociativeArray
-addExtension
+assemble_associative_array
+add_extension
 main

@@ -21,6 +21,7 @@ zparseopts -D -F -- \
     { print -l "${(@)usage}" && exit 1 }
 
 [[ -z $help ]] || { print -l "${(@)description}" "${(@)usage}" && exit 0 }
+[[ -n $1 && $1 =~ ^[0-9]+(\.[0-9]+)?$ ]] || { echo '[!] Absent or incorrect var' && exit 1 }
 
 killall caffeinate &>/dev/null || true
-( /usr/bin/caffeinate -dmi -t "$(( $1 * 60 ))" & disown ) &>/dev/null || true
+( /usr/bin/caffeinate -dmi -t "$(printf %d $(( $1 * 60 )))" & disown ) &>/dev/null || true

@@ -20,11 +20,9 @@ zparseopts -D -F -- \
 [[ -z $help ]] || { print -l "${(@)usage}" && exit 0 }
 
 function check_deps() {
-    [[ ${#@} != 0 ]] || { echo '[!] check_deps :: none passed' && exit 2 }
-
     local failed
 
-    for dep in "$@"; do
+    for dep in "${(@)deps_list}"; do
         type "$dep" &>/dev/null || { echo "[!] No $dep installed" && failed=1 }
     done
 
@@ -32,7 +30,7 @@ function check_deps() {
 }
 
 function main() {
-    check_deps "${(@)deps_list}"
+    check_deps
 
     fd -t f -e apk -IH --max-depth 10 |
     fzf \

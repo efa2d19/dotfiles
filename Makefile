@@ -21,10 +21,10 @@ ensure-stow: brew
 	depends-on stow || brew install stow
 
 link: ensure-stow
-	./config/dotsetup -vd
+	./config/dotsetup -va
 
 unlink: ensure-stow
-	./config/dotsetup -vd --uninstall
+	./config/dotsetup -va --uninstall
 
 sys:
 	./system/settings

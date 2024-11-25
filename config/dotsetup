@@ -44,8 +44,6 @@ function parse_argv() {
 }
 
 function check_deps() {
-    [[ ${#@} != 0 ]] || { echo '[!] check_deps :: none passed' && exit 2 }
-
     local failed
 
     for dep in "${(@)deps_list}"; do
@@ -105,7 +103,7 @@ function deploy() {
 }
 
 function main() {
-    check_deps "${(@)deps_list}"
+    check_deps
 
     local dir_list=()
 

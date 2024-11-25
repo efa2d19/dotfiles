@@ -54,7 +54,7 @@ alias brew@cleanup='temp="$(mktemp)"; cat "${HOME}/.brewfile" "${HOME}/.caskfile
 
 ## adb
 alias adb@url='adb wait-for-device && adb shell am start -a android.intent.action.VIEW -d "$(clippaste)"'
-alias adb@control='scrcpy -Stw --render-driver=metal --rotation=0 --window-y=00 --window-x=2056 --max-fps=60 --no-audio --power-off-on-close --disable-screensaver &>/dev/null & disown'
+alias adb@control='scrcpy -Stw --render-driver=metal --orientation=0 --window-y=00 --window-x=2056 --max-fps=60 --no-audio --power-off-on-close --disable-screensaver &>/dev/null & disown'
 
 alias adb@proxy='adb wait-for-device && adb shell settings put global http_proxy $(ipconfig getifaddr en0):9100'
 alias adb@unproxy='adb wait-for-device && adb shell settings put global http_proxy :0'

@@ -1,12 +1,13 @@
 #!/usr/bin/env zsh
 
-local help verbose use_default dry custom delete
+local help verbose use_default use_all dry custom delete
 
 local usage=(
     'Usage:'
     '  dotsetup [-h|--help] [-v|--verbose]'
-    '  dotsetup [-d|--default] [--uninstall]'
+    '  dotsetup [-d|--default] [-a|--all]  [--uninstall]'
     '  dotsetup [-n|--dry-run] [-c|--custom]'
+    '\nDefault list can be extended using exported ${DOTSETUP_DEFAULT} w/ <space> delimiter'
 )
 
 local deps_list=(
@@ -20,7 +21,8 @@ zparseopts -D -F \
     {d,-default}=use_default \
     {n,-dry-run}=dry \
     -uninstall=delete \
-    {c,-custom}+:=custom ||
+    {c,-custom}+:=custom \
+    {a,-all}=use_all ||
     { print -l "\n${(@)usage}" && exit 1 }
 
 local self_location="$(realpath $0 | xargs dirname)"
@@ -28,6 +30,18 @@ local self_location="$(realpath $0 | xargs dirname)"
 function parse_argv() {
     [[ -z $help ]] || { print -l "${(@)usage}" && exit 0 }
 
+	[[ -z $use_all ]] || {
+        unset use_default
+        custom=()
+
+        for item in "$self_location"/*; do
+            [[ -d $item ]] || continue
+
+            custom+=("$(basename $item)")
+        done
+
+        return
+    }
 
     [[ -z $custom ]] || {
         local temp_arr=()

@@ -5,7 +5,7 @@ local help
 local usage=(
     'Usage:'
     '\tnice_ [-h|-help]'
-    '\n\tAlso uses $NICE_EXT to execute custom stuff'
+    '\n\tUses $NICE_EXT of kv pair with CRNL as separator to execute stuff'
 )
 
 local dependencies=(
@@ -28,64 +28,23 @@ function check_deps() {
     [[ -z $failed ]] || { exit 1 }
 }
 
-declare -A nice_arr
+function get_extensions() {
+    [[ $NICE_EXT ]] || {
+        echo '[?] No extensions found'
+        exit 1
+    }
 
-local lowest_priority=(
-    'aldente.app'
-    'itsycal'
-    'bitwarden'
-    'keka'
-    'openinterminal'
-)
-
-local highest_priority=(
-    'raycast'
-)
-
-local ten_priority=(
-    'music'
-    'proxyman.ns'
-    'batteries.app'
-    'adb'
-)
-
-local eleven_priority=(
-    'proxyman.app'
-)
-
-local twelve_priority=(
-    'charles'
-)
-
-local minus_fifteen_priority=(
-    'warp.app'
-)
-
-function assemble_associative_array() {
-    nice_arr[20]="${(j:\n:)lowest_priority}"
-    nice_arr[-20]="${(j:\n:)highest_priority}"
-    nice_arr[10]="${(j:\n:)ten_priority}"
-    nice_arr[11]="${(j:\n:)eleven_priority}"
-    nice_arr[12]="${(j:\n:)twelve_priority}"
-    nice_arr[-15]="${(j:\n:)minus_fifteen_priority}"
-}
-
-function add_extension() {
-    [[ $NICE_EXT ]] || { return }
-    echo '[?] Extension found'
+    echo '[?] Extensions found'
 
     read -rA ext_arr <<< "$NICE_EXT"
 
     for key val in "${(@kv)ext_arr}"; do
-
         [[ -n ${nice_arr[$key]+_} ]] || {
             nice_arr[$key]="$val"
-            echo "[?] No conflicts, added"
             continue
         }
 
         nice_arr[$key]="${nice_arr[$key]}\n${val}"
-        echo "[?] Conflicts, concated"
     done
 
     unset ext_arr
@@ -114,6 +73,6 @@ function main() {
 }
 
 check_deps
-assemble_associative_array
-add_extension
+declare -A nice_arr
+get_extensions
 main

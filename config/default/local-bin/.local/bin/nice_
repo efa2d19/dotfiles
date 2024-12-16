@@ -5,7 +5,7 @@ local help
 local usage=(
     'Usage:'
     '\tnice_ [-h|-help]'
-    '\n\tUses $NICE_EXT of kv pair with CRNL as separator to execute stuff'
+    '\n\tUses $NICE_EXT of kv pair with : as separator to execute stuff'
 )
 
 local dependencies=(
@@ -44,7 +44,7 @@ function get_extensions() {
             continue
         }
 
-        nice_arr[$key]="${nice_arr[$key]}\n${val}"
+        nice_arr[$key]="${nice_arr[$key]}:${val}"
     done
 
     unset ext_arr
@@ -54,7 +54,7 @@ function main() {
     for key val in "${(@kv)nice_arr}"; do
         (( $key >= 0 )) && { priority="+${key}" } || { priority="$key" }
 
-        for item in "${(@s/\n/)val}"; do
+        for item in "${(@s/:/)val}"; do
             (
                 local item_pids=($(sudo procs $item --only pid --no-header | awk '{ print $1 }'))
 

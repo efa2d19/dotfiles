@@ -7,7 +7,7 @@ export MANPAGER='nvim +Man!'
 export GPG_TTY="$(tty)"
 
 export ANDROID_HOME="$HOME/Library/Android/sdk"
-export JAVA_HOME="$(/usr/libexec/java_home -v 17)"
+export JAVA_HOME="$(/usr/libexec/java_home -v 21)"
 
 ## magic-enter
 MAGIC_ENTER_GIT_COMMAND='gst -u no'

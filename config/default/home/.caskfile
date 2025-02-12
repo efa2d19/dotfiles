@@ -20,7 +20,7 @@ cask "raycast"
 cask "secretive"
 cask "syntax-highlight"
 cask "telegram"
-cask "temurin@17"
+cask "temurin@21"
 cask "utm"
 cask "warp"
 mas "Bitwarden", id: 1352778147

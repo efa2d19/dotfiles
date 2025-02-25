@@ -8,8 +8,8 @@
 local help clear dock_items
 
 local usage=(
-    'Removes all items from Dock and all default one'
-    'Plus additional ones if specified'
+    'Adds stuff from exported DOCK_EXT w/ CRNL as separator to Dock'
+    'Plus additional ones if specified as argv'
     'Usage:'
     '\tdock [-h|--help]'
     '\tdock [-c|--clear] <vararg additional_items: String>'
@@ -22,23 +22,25 @@ zparseopts -D -F -- \
 
 [[ -z $help ]] || { print -l "${(@)usage}" && exit 0 }
 
-local dock_items=(
-    '/System/Applications/Messages.app'
-    '/Applications/Arc.app'
-    '/System/Applications/Music.app'
-    '/Applications/Warp.app'
-    '/System/Applications/System Settings.app'
-)
+function get_ext() {
+    [[ $DOCK_EXT ]] || { echo '[!] No extensions found' && exit 1 }
 
-[[ ${#@} == 0 ]] || { dock_items+=("$@") }
+    dock_items=(${(f)DOCK_EXT})
+    [[ ${#@} == 0 ]] || { dock_items+=("$@") }
+}
 
-# Clear all but finder
-[[ -z $clear ]] || dockutil --no-restart --remove all
+function main() {
+    # Clear all but finder
+    [[ -z $clear ]] || dockutil --no-restart --remove all
 
-# Add custom ones
-for item in "${(@)dock_items}"; do
-    dockutil --no-restart --add "$item"
-done
+    # Add custom ones
+    for item in "${(@)dock_items}"; do
+        dockutil --no-restart --add "$item"
+    done
 
-# Restart dock
-killall Dock
+    # Restart dock
+    killall Dock
+}
+
+get_ext $@
+main

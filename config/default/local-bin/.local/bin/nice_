@@ -30,7 +30,7 @@ function check_deps() {
 
 function get_extensions() {
     [[ $NICE_EXT ]] || {
-        echo '[?] No extensions found'
+        echo '[!] No extensions found'
         exit 1
     }
 

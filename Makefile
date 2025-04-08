@@ -41,3 +41,5 @@ xcode-clt:
 zsh:
 	./system/zsh
 
+pull:
+	git -c protocol.file.allow=always submodule update --remote --checkout --force

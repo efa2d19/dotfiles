@@ -86,6 +86,9 @@ alias gai='ga -i'
 alias git@update='git fetch --all &>/dev/null && git pull --all &>/dev/null && for remote in "$(git branch -r)"; do if [[ $remote != "->" ]]; then git branch --track "${remote#origin/}" "$remote" 2>&/dev/null; fi; done'
 alias git@prune='git fetch --prune && git branch -vv | awk "/: gone]/ && !/^\*/ {print \$1}" | xargs -r git branch -D'
 
+## fzf
+alias fzf_='fzf --preview-window "right:$(( $(tput cols) / 4 * 3 )):border-vertical" --bind "ctrl-\\:change-preview-window($(( $(tput cols) / 5 ))|$(( $(tput cols) / 4 * 3 )))"'
+
 # -- Eval stuff --
 _evalcache zoxide init zsh --cmd=cd
 _evalcache thefuck --alias

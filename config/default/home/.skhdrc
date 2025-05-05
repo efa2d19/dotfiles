@@ -9,71 +9,63 @@ alt - l : yabai -m window --focus east
 # -- Modifying Window Size --
 
 # make smaller
-meh - 0x1B : yabai -m window --resize right:-50:0; \
+cmd + fn - 0x1B : yabai -m window --resize right:-50:0; \
 						  yabai -m window --resize left:50:0; \
 						  yabai -m window --resize top:0:50; \
 						  yabai -m window --resize bottom:0:-50
 
 # make bigger
-meh - 0x18 : yabai -m window --resize right:50:0; \
+cmd + fn - 0x18 : yabai -m window --resize right:50:0; \
 						  yabai -m window --resize left:-50:0; \
 						  yabai -m window --resize top:0:-50; \
 						  yabai -m window --resize bottom:0:50
 
 # make bigger vertically
-meh - k : yabai -m window --resize top:0:-50; \
+cmd + fn - k : yabai -m window --resize top:0:-50; \
 						yabai -m window --resize bottom:0:50
 
 # make smaller vertically
-meh - j : yabai -m window --resize top:0:50; \
+cmd + fn - j : yabai -m window --resize top:0:50; \
 						yabai -m window --resize bottom:0:-50
 
 # make bigger horizontally
-meh - l : yabai -m window --resize left:-50:0; \
+cmd + fn - l : yabai -m window --resize left:-50:0; \
 						  yabai -m window --resize right:50:0
 
 # make smaller horizontally
-meh - h : yabai -m window --resize left:50:0; \
+cmd + fn - h : yabai -m window --resize left:50:0; \
 						  yabai -m window --resize right:-50:0
 
 # maximize a window
-ctrl + alt + cmd - i : yabai -m window float --grid 1:1:0:0:1:1; \
+fn - i : yabai -m window float --grid 1:1:0:0:1:1; \
 					   yabai -m window --toggle zoom-fullscreen
 
 # center a window
-ctrl + alt + cmd - space : yabai -m window --grid 4:4:1:1:2:2
-meh - space : yabai -m window --toggle float --grid 4:4:1:1:2:2
+fn - space : yabai -m window --toggle float --grid 4:4:1:1:2:2
+cmd + fn - space : yabai -m window --grid 4:4:1:1:2:2
 
 # balance out tree of windows (resize to occupy same area)
-ctrl + alt + cmd - y : yabai -m space --balance
+fn - y : yabai -m space --balance
 
 # -- Moving Windows Around --
 
 # move window and split
-hyper - k : yabai -m window --warp north
-hyper - j : yabai -m window --warp south
-hyper - h : yabai -m window --warp west
-hyper - l : yabai -m window --warp east
+fn - k : yabai -m window --warp north
+fn - j : yabai -m window --warp south
+fn - h : yabai -m window --warp west
+fn - l : yabai -m window --warp east
 
 # swap windows
-ctrl + alt + cmd - k : yabai -m window --swap north
-ctrl + alt + cmd - j : yabai -m window --swap south
-ctrl + alt + cmd - h : yabai -m window --swap west
-ctrl + alt + cmd - l : yabai -m window --swap east
+alt + fn - k : yabai -m window --swap north
+alt + fn - j : yabai -m window --swap south
+alt + fn - h : yabai -m window --swap west
+alt + fn - l : yabai -m window --swap east
 
 # split
-ctrl + alt + cmd - u : yabai -m window --toggle split
+fn - u : yabai -m window --toggle split
 
 # replace and hide
-ctrl + alt + cmd - o : yabai -m window --stack next
-
-# move window to space
-hyper - 1 : yabai -m window --space 1
-hyper - 2 : yabai -m window --space 2
-hyper - 3 : yabai -m window --space 3
-hyper - 4 : yabai -m window --space 4
-hyper - 5 : yabai -m window --space 5
-hyper - 6 : yabai -m window --space 6
+fn - o : yabai -m window --stack next
 
 # -- Custom --
 

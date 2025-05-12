@@ -25,8 +25,8 @@ export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --no-ignore-
 # -- Custom PATH mod --
 ## Brew stuff
 export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/coreutils/libexec/gnubin${PATH+:$PATH}"
-export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/node@20/bin${PATH+:$PATH}"
-export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/python@3.12/bin${PATH+:$PATH}"
+export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/node/bin${PATH+:$PATH}"
+export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/python3/bin${PATH+:$PATH}"
 export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/curl/bin${PATH+:$PATH}"
 
 ## Android platform tools

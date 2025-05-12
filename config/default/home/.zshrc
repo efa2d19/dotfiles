@@ -32,7 +32,6 @@ plugins=(
 	command-not-found
 	history
 	history-substring-search
-	thefuck
 	zsh-autosuggestions
 	zsh-syntax-highlighting
 )
@@ -91,7 +90,6 @@ alias fzf_='fzf --preview-window "right:$(( $(tput cols) / 4 * 3 )):border-verti
 
 # -- Eval stuff --
 _evalcache zoxide init zsh --cmd=cd
-_evalcache thefuck --alias
 
 # -- Extensions --
 for ext in "$HOME"/.zshrc*.ext; do source "$ext"; done 2>/dev/null

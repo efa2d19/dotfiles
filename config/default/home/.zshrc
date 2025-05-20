@@ -50,7 +50,7 @@ alias java@list='/usr/libexec/java_home -V'
 ## Brew
 alias brew@upd='brew cu -af --cleanup --include-mas && brew upgrade'
 alias brew@dump='brew bundle dump --formula --tap --force --file="${HOME}/.brewfile"; brew bundle dump --cask --mas --force --file="${HOME}/.caskfile"'
-alias brew@cleanup='temp="$(mktemp)"; cat "${HOME}/.brewfile" "${HOME}/.caskfile" > "$temp"; brew bundle --cleanup --force --file="$temp"; rm "$temp"'
+alias brew@cleanup='brew bundle --cleanup --force --file <(cat "${HOME}/.brewfile" "${HOME}/.caskfile")'
 
 ## adb
 alias adb@url='adb wait-for-device && adb shell am start -a android.intent.action.VIEW -d "$(clippaste)"'

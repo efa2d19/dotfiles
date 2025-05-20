@@ -23,8 +23,12 @@ function main() {
         -message "$(SwitchAudioSource -t output -n)"
 }
 
+local scoped_fd
+local lock='/tmp/outputswitch.lock'
+exec {scoped_fd}>"$lock"
+
 (
-    lockf -st 0 8 || { exit 0 }
-    trap 'exec 8>&- && rm /tmp/outputswitch_lock' EXIT INT
+    lockf -st 0 "$scoped_fd" || { echo '[!] Locked -' "$lock" && exit 0 }
+    trap 'exec {scoped_fd}>&- && unlink "$lock"' EXIT INT
     main
-) 8>/tmp/outputswitch_lock
+)

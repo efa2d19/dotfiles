@@ -52,27 +52,7 @@ alias brew@upd='brew cu -af --cleanup --include-mas && brew upgrade'
 alias brew@dump='brew bundle dump --formula --tap --force --file="${HOME}/.brewfile"; brew bundle dump --cask --mas --force --file="${HOME}/.caskfile"'
 alias brew@cleanup='brew bundle --cleanup --force --file <(cat "${HOME}/.brewfile" "${HOME}/.caskfile")'
 
-## adb
-alias adb@url='adb wait-for-device && adb shell am start -a android.intent.action.VIEW -d "$(clippaste)"'
-alias adb@control='scrcpy -Stw --render-driver=metal --orientation=0 --window-y=00 --window-x=2056 --max-fps=60 --no-audio --power-off-on-close --disable-screensaver &>/dev/null & disown'
-
-alias adb@proxy='adb wait-for-device && adb shell settings put global http_proxy $(ipconfig getifaddr en0):9100'
-alias adb@unproxy='adb wait-for-device && adb shell settings put global http_proxy :0'
-
-alias adb@layout='adb wait-for-device && { adb shell setprop debug.layout true && adb shell service call activity 1599295570 }'
-alias adb@unlayout='adb wait-for-device && { adb shell setprop debug.layout false && adb shell service call activity 1599295570 }'
-
-alias adb@noanim='adb wait-for-device && { adb shell settings put global window_animation_scale 0; adb shell settings put global transition_animation_scale 0; adb shell settings put global animator_duration_scale 0 }'
-alias adb@anim='adb wait-for-device && { adb shell settings put global window_animation_scale 1; adb shell settings put global transition_animation_scale 1; adb shell settings put global animator_duration_scale 1 }'
-
-## Emulator
-alias android='emulator @phone -feature -Vulkan &>/dev/null & disown'
-alias android@writable='emulator @phone -writable-system -feature -Vulkan &>/dev/null & disown'
-alias android@bg='emulator @phone -writable-system -feature -Vulkan -no-window -no-audio &>/dev/null & disown'
-
 ## Misc
-alias studio@here='studio "$(pwd)"'
-alias idea@here='idea "$(pwd)"'
 alias resetComp='rm ~/.zcompdump*; compinit'
 
 ## Git

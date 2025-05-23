@@ -2,9 +2,6 @@
 background: "#1e1e1f"
 accent: "#ffffff"
 foreground: "#ffffff"
-background_image:
-  path: ~/.warp/themes/main.png
-  opacity: 30
 details: darker
 terminal_colors:
   normal:

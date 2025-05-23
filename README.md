@@ -46,6 +46,9 @@ Yet another personal dotfiles repo
 - `make xcode-clt`
   > Installs xcode clt
 
+- `make pull`
+  > Update all submodules as a force checkout with file protocol enabled
+
 ## 📝 License
 
 All set to go under the [Apache-2.0 License](/LICENSE). Use it, modify it, share it.

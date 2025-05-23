@@ -24,6 +24,7 @@ export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --no-ignore-
 # export ARCHFLAGS="-arch x86_64"
 
 # -- Custom PATH mod --
+
 ## Brew stuff
 export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/coreutils/libexec/gnubin${PATH+:$PATH}"
 export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/node/bin${PATH+:$PATH}"

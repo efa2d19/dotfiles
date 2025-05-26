@@ -35,9 +35,6 @@ export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/curl/bin${PATH+:$PATH}"
 export PATH="${ANDROID_HOME:-$ANDROID_SDK_ROOT}/emulator${PATH+:$PATH}"
 export PATH="${ANDROID_HOME:-$ANDROID_SDK_ROOT}/platform-tools${PATH+:$PATH}"
 
-## Jetbrains toolbox
-export PATH="$HOME/Library/Application Support/JetBrains/Toolbox/scripts${PATH+:$PATH}"
-
 ## local/bin
 export PATH="$HOME/.local/bin${PATH+:$PATH}"
 

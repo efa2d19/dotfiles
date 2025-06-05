@@ -35,3 +35,5 @@ yabai -m rule --add app="^QuickTime Player$" manage=off
 yabai -m rule --add app="^Arc$" manage=off
 yabai -m rule --add app="^Warp$" manage=off
 yabai -m rule --add app="^Keka$" manage=off
+yabai -m rule --add app="^Bitwarden$" manage=off
+yabai -m rule --add app="^Raycast$" manage=off

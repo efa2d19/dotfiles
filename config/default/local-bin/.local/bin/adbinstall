@@ -2,12 +2,13 @@
 
 local help
 
+local name="${0:t}"
 local usage=(
     'Usage:'
-    '\tadbinstall [-h|--help]'
+    "\t$name [-h|--help]"
 )
 
-local deps_list=(
+local deps=(
     'adb'
     'fd'
     'fzf'
@@ -15,29 +16,30 @@ local deps_list=(
 
 zparseopts -D -F -- \
     {h,-help}=help ||
-    { print -l "${(@)usage}" && exit 1 }
+    { print -l "\n${(@)usage}" && exit 1 }
 
 [[ -z $help ]] || { print -l "${(@)usage}" && exit 0 }
 
 function check_deps() {
-    local failed
+    [[ -n $deps ]] || { echo '[!] Incorrect env - check_deps' && exit 2 }
 
-    for dep in "${(@)deps_list}"; do
-        type "$dep" &>/dev/null || { echo "[!] No $dep installed" && failed=1 }
+    local failed
+    for dep in "${(@)deps}"; do
+        type "$dep" &>/dev/null || { echo '[!] Missing -' "$dep" && failed=1 }
     done
 
-    [[ -z $failed ]] || { exit 2 }
+    [[ -z $failed ]] || { exit 1 }
 }
 
 function main() {
     check_deps
 
-    fd -t f -e apk -IH --max-depth 10 |
+    fd -t f -e apk -IH --max-depth 10 | \
     fzf \
         --multi \
         --preview 'stat -c %Y {} | xargs -I {} date -d @{}' \
         --preview-window "right:$(( $(tput cols) / 4 * 3 )):border-vertical" \
-        --bind "ctrl-\\:change-preview-window($(( $(tput cols) / 5 ))|$(( $(tput cols) / 4 * 3 )))" |
+        --bind "ctrl-\\:change-preview-window($(( $(tput cols) / 5 ))|$(( $(tput cols) / 4 * 3 )))" | \
     xargs -I {} adb install -d -r {}
 }
 

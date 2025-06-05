@@ -1,25 +1,27 @@
 #!/usr/bin/env zsh
 
-local help temp res
+local help
 
+local name="${0:t}"
 local usage=(
     'Optimizes image in clipboard and converts to webp\n'
     'Usage:'
-    '\tclipboard2webp [-h|--help]'
+    "\t$name [-h|--help]"
 )
 
-local depsList=(
+local deps=(
     'ffmpeg'
 )
 
-zparseopts -D -F \
+zparseopts -D -F -- \
     {h,-help}=help ||
-    { printf -l "${(@)usage}" && exit 1 }
+    { printf -l "\n${(@)usage}" && exit 1 }
 
 [[ -z $help ]] || { print -l "${(@)usage}" && exit 0 }
 
-function readClipboardToFile() {
+function read_clipboard_to_file() {
     local file="$1"
+    [[ -n $file ]] || { echo '[!] Incorrect usage - read_clipboard_to_file' && exit 2 }
     [[ -f $file ]] || { echo '[!] No target file found' && exit 2 }
 
     osascript \
@@ -32,40 +34,40 @@ function readClipboardToFile() {
 function convert() {
     local input="$1"
     local target="$2"
-    [[ -n $input && -n $target ]] || { echo '[!] No input or target provided' && exit 2 }
+    [[ -n $input && -n $target ]] || { echo '[!] Incorrect usage - convert' && exit 2 }
 
     ffmpeg -i "$input" "$target"
 }
 
-function writeImageToClipboard() {
+function write_image_to_clipboard() {
     local image="$1"
+    [[ -n $image ]] || { echo '[!] Incorrect usage - write_image_to_clipboard' && exit 2 }
     [[ -f $image ]] || { echo '[!] No image found' && exit 2 }
 
     osascript -e "set the clipboard to (read (POSIX file \"$image\") as «class PNGf»)"
 }
 
-function checkDeps() {
-    [[ ${#@} != 0 ]] || { echo '[!] No deps passed' && exit 2 }
+function check_deps() {
+    [[ -n $deps ]] || { echo '[!] Incorrect env - check_deps' && exit 2 }
 
     local failed
-
-    for dep in "$@"; do
-        type "$dep" &>/dev/null || { echo "[!] No $dep found" && failed=1 }
+    for dep in "${(@)deps}"; do
+        type "$dep" &>/dev/null || { echo '[!] Missing -' "$dep" && failed=1 }
     done
 
     [[ -z $failed ]] || { exit 1 }
 }
 
 function main() {
-    checkDeps "${(@)depsList}"
+    check_deps
 
-    temp="$(mktemp -t clipboard.XXXXXXXXXX)"
-    res="$temp.webp"
+    local temp="$(mktemp -t clipboard.XXXXXXXXXX)"
+    local res="$temp.webp"
     trap '(unlink "$temp"; unlink "$res") &>/dev/null' EXIT INT
 
-    readClipboardToFile "$temp" || { echo '[!] Can not convert to image type' && exit 1 }
+    read_clipboard_to_file "$temp" || { echo '[!] Can not convert to image type' && exit 1 }
     convert "$temp" "$res" || { echo '[!] Convertion to webp failed' && exit 1 }
-    writeImageToClipboard "$res"
+    write_image_to_clipboard "$res"
 }
 
 main

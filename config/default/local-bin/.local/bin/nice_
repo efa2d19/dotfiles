@@ -2,27 +2,31 @@
 
 local help
 
+local name="${0:t}"
 local usage=(
     'Usage:'
-    '\tnice_ [-h|-help]'
-    '\n\tUses $NICE_EXT of kv pair with : as separator to execute stuff'
+    "\t$name [-h|-help]"
+    '\nUses $NICE_EXT of kv pair with : as separator to execute stuff'
 )
 
-local dependencies=(
+local deps=(
     'procs'
 )
 
 zparseopts -D -F -- \
     {h,-help}=help ||
-    { print -l "${(@)usage}" && exit 1 }
+    { print -l "\n${(@)usage}" && exit 1 }
 
 [[ -z $help ]] || { print -l "${(@)usage}" && exit 0 }
 
-function check_deps() {
-    local failed
+local nice_arr
 
-    for dep in "${(@)dependencies}"; do
-        type "$dep" &>/dev/null || { failed=1; echo "[!] No dependency - $dep" }
+function check_deps() {
+    [[ -n $deps ]] || { echo '[!] Incorrect env - check_deps' && exit 2 }
+
+    local failed
+    for dep in "${(@)deps}"; do
+        type "$dep" &>/dev/null || { echo '[!] Missing -' "$dep" && failed=1 }
     done
 
     [[ -z $failed ]] || { exit 1 }
@@ -50,7 +54,7 @@ function get_extensions() {
     unset ext_arr
 }
 
-function main() {
+function process() {
     for key val in "${(@kv)nice_arr}"; do
         (( $key >= 0 )) && { priority="+${key}" } || { priority="$key" }
 
@@ -72,7 +76,12 @@ function main() {
     wait
 }
 
-check_deps
-declare -A nice_arr
-get_extensions
+function main() {
+    check_deps
+    declare -A nice_arr
+    get_extensions
+    process
+
+}
+
 main

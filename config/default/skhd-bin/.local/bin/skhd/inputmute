@@ -1,15 +1,16 @@
 #!/usr/bin/env zsh
 
-local deps_list=(
+local deps=(
     'SwitchAudioSource'
     'terminal-notifier'
 )
 
 function check_deps() {
-    local failed
+    [[ -n $deps ]] || { echo '[!] Incorrect usage - check_deps' && exit 2 }
 
-    for dep in "${(@)deps_list}"; do
-        type "$dep" &>/dev/null || { echo "[!] No $dep installed" && failed=1 }
+    local failed
+    for dep in "${(@)deps}"; do
+        type "$dep" &>/dev/null || { echo '[!] Missing -' "$dep" && failed=1 }
     done
 
     [[ -z $failed ]] || { exit 1 }

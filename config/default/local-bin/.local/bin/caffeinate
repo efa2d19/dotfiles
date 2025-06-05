@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-local help 
+local help
 
 local description=(
     'Caffeinate wrapper using minutes'
@@ -10,15 +10,16 @@ local description=(
     '\t-i=No system idle\n'
 )
 
+local name="${0:t}"
 local usage=(
     'Usage:'
-    '\tcaffeinate [-h|--help]'
-    '\tcaffeinate <minutes>'
+    "\t$name [-h|--help]"
+    "\t$name <minutes>"
 )
 
 zparseopts -D -F -- \
     {h,-help}=help ||
-    { print -l "${(@)usage}" && exit 1 }
+    { print -l "\n${(@)usage}" && exit 1 }
 
 [[ -z $help ]] || { print -l "${(@)description}" "${(@)usage}" && exit 0 }
 [[ -n $1 && $1 =~ ^[0-9]+(\.[0-9]+)?$ ]] || { echo '[!] Absent or incorrect var' && exit 1 }

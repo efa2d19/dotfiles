@@ -49,17 +49,17 @@ fn - y : yabai -m space --balance
 
 # -- Moving Windows Around --
 
-# move window and split
-fn - k : yabai -m window --warp north
-fn - j : yabai -m window --warp south
-fn - h : yabai -m window --warp west
-fn - l : yabai -m window --warp east
-
 # swap windows
-alt + fn - k : yabai -m window --swap north
-alt + fn - j : yabai -m window --swap south
-alt + fn - h : yabai -m window --swap west
-alt + fn - l : yabai -m window --swap east
+fn - k : yabai -m window --swap north
+fn - j : yabai -m window --swap south
+fn - h : yabai -m window --swap west
+fn - l : yabai -m window --swap east
+
+# move window and split
+alt + fn - k : yabai -m window --warp north
+alt + fn - j : yabai -m window --warp south
+alt + fn - h : yabai -m window --warp west
+alt + fn - l : yabai -m window --warp east
 
 # split
 fn - u : yabai -m window --toggle split

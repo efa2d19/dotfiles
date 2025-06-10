@@ -39,7 +39,7 @@ xcode-clt:
 	xcode-select --install || true
 
 zsh:
-	./system/zsh
+	./system/zsh --all
 
 pull:
 	git -c protocol.file.allow=always submodule update --remote --checkout --force

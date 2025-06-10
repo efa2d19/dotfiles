@@ -1,20 +1,97 @@
 #!/usr/bin/env zsh
 
-# Check if oh-my-zsh is not installed and quit otherwise
+local help omz_install theme_install plugins_install all_install
 
-[[ -d $HOME/.oh-my-zsh ]] && { echo '[?] oh-my-zsh already installed' && exit 0 }
+local name="${0:t}"
+local usage=(
+    'Usage:'
+    "\t$name [-h|--help]"
+    "\t$name [-a|--all]"
+    "\t$name [--omz]"
+    "\t$name [--theme]"
+    "\t$name [--plugins]"
+)
 
-# Install ohmyzsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+local deps=(
+    'git'
+)
 
-# Reload config
-source ~/.zshrc
-source ~/.zprofile
+zparseopts -D -F -- \
+    {h,-help}=help \
+    {a,-all}=all_install \
+    -omz=omz_install \
+    -theme=theme_install \
+    -plugins=plugins_install ||
+    { print -l "\n${(@)usage}" && exit 1 }
 
-# Install powerlevel10k
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+[[ -z $help ]] || { print -l "${(@)usage}" && exit 0 }
 
-# Install plugins
-git clone https://github.com/mroth/evalcache ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/evalcache
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+function parse_argv() {
+    [[ -z $all_install ]] || {
+        omz_install=1
+        theme_install=1
+        plugins_install=1
+    }
+}
+
+function check_deps() {
+    [[ -n $deps ]] || { echo '[!] Incorrect env - check_deps' && exit 2 }
+
+    local failed
+    for dep in "${(@)deps}"; do
+        type "$dep" &>/dev/null || { echo '[!] Missing -' "$dep" && failed=1 }
+    done
+
+    [[ -z $failed ]] || { exit 1 }
+}
+
+local omz_install_script='https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh'
+local theme='https://github.com/romkatv/powerlevel10k'
+local plugins=(
+    'https://github.com/mroth/evalcache'
+    'https://github.com/zsh-users/zsh-autosuggestions'
+    'https://github.com/zsh-users/zsh-syntax-highlighting'
+)
+
+function install_omz_if_none() {
+    [[ -d $HOME/.oh-my-zsh ]] && { echo '[?] oh-my-zsh is already installed' && return 1 }
+
+    sh -c "$(curl -fsSL $omz_install_script)"
+}
+
+function install_theme() {
+    [[ -n $theme ]] || { echo '[!] Incorrect env - install_theme' && exit 2 }
+
+    git clone "$theme" "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/${theme:t}"
+}
+
+function install_plugin() {
+    local plugin="$1"
+    [[ -n $plugin ]] || { echo '[!] Incorrect usage - install_plugin' && exit 1 }
+
+    git clone "$plugin" "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/${plugin:t}"
+}
+
+function install_plugins() {
+    [[ -n $plugins ]] || { echo '[!] Incorrect env - install_plugins' && exit 2 }
+
+    for plugin in "${(@)plugins}"; do
+        install_plugin "$plugin"
+    done
+}
+
+function main() {
+    check_deps
+    parse_argv
+
+    [[ -z $omz_install ]] || {
+        install_omz_if_none && {
+            . ~/.zshrc
+            . ~/.zprofile
+        }
+    }
+    [[ -z $theme_install ]] || { install_theme }
+    [[ -z $plugins_install ]] || { install_plugins }
+}
+
+main

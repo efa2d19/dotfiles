@@ -1,9 +1,9 @@
 #!/usr/bin/env zsh
 
-###############################################################################
-# Special thanks to                                                           #
-# https://github.com/webpro/dotfiles/                                        #
-##############################################################################
+##################################################
+# Special thanks to                              #
+# https://github.com/webpro/dotfiles/            #
+##################################################
 
 local help no_rename
 
@@ -15,19 +15,23 @@ local DEFAULT_LANGUAGES=(
     'ru-US'
 )
 
+local description=(
+    'Configures settings on macos using defaults'
+)
+
+local name="${0:t}"
 local usage=(
-    'Sets default settings for mac\n'
     'Usage:'
-    '\tsettings [-h|--help]'
-    '\tsettings [-r|--no-rename]'
+    "\t$name [-h|--help]"
+    "\t$name [-r|--no-rename]"
 )
 
 zparseopts -D -F -- \
     {h,-help}=help \
     {r,-no-rename}=no_rename ||
-    { print -l "${(@)usage}" && exit 1 }
+    { print -l "\n${(@)usage}" && exit 1 }
 
-[[ -z $help ]] || { print -l "${(@)usage}" && exit 0 }
+[[ -z $help ]] || { print -l "${(@)description}" "${(@)usage}" && exit 0 }
 
 ###############################################################################
 # Computer & Host name                                                        #

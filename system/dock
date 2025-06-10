@@ -1,46 +1,54 @@
 #!/usr/bin/env zsh
 
-###############################################################################
-# Special thanks to                                                           #
-# https://github.com/webpro/dotfiles/                                         #
-###############################################################################
+##################################################
+# Special thanks to                              #
+# https://github.com/webpro/dotfiles/            #
+##################################################
 
-local help clear dock_items
+local help clear
 
-local usage=(
-    'Adds stuff from exported DOCK_EXT w/ CRNL as separator to Dock'
+local description=(
+    'Populates dock with apps from DOCK_EXT env with CRNL as separator'
     'Plus additional ones if specified as argv'
+)
+
+local name="${0:t}"
+local usage=(
     'Usage:'
-    '\tdock [-h|--help]'
-    '\tdock [-c|--clear] <vararg additional_items: String>'
+    "\t$name [-h|--help]"
+    "\t$name [-c|--clear]"
+    "\t$name <vararg additional_items>"
 )
 
 zparseopts -D -F -- \
     {h,-help}=help \
     {c,-clear}=clear ||
-    { print -l "${(@)usage}" && exit 1 }
+    { print -l "\n${(@)usage}" && exit 1 }
 
-[[ -z $help ]] || { print -l "${(@)usage}" && exit 0 }
+[[ -z $help ]] || { print -l "${(@)description}" "${(@)usage}" && exit 0 }
 
-function get_ext() {
-    [[ $DOCK_EXT ]] || { echo '[!] No extensions found' && exit 1 }
+function reset_dock() {
+    dockutil --no-restart --remove all
+}
 
-    dock_items=(${(f)DOCK_EXT})
-    [[ ${#@} == 0 ]] || { dock_items+=("$@") }
+function restart_dock() {
+    killall Dock
 }
 
 function main() {
-    # Clear all but finder
-    [[ -z $clear ]] || dockutil --no-restart --remove all
+    local dock_items=()
+    typeset -U dock_items
 
-    # Add custom ones
+    dock_items=(${(f)DOCK_EXT})
+    dock_items+=($@)
+
+    [[ -z $clear ]] || reset_dock
+
     for item in "${(@)dock_items}"; do
         dockutil --no-restart --add "$item"
     done
 
-    # Restart dock
-    killall Dock
+    restart_dock
 }
 
-get_ext $@
-main
+main $@

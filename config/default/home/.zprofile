@@ -25,17 +25,22 @@ export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --no-ignore-
 
 # -- Custom PATH mod --
 
-## Brew stuff
+## brew stuff
 export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/coreutils/libexec/gnubin${PATH+:$PATH}"
 export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/node/bin${PATH+:$PATH}"
 export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/python3/bin${PATH+:$PATH}"
 export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/curl/bin${PATH+:$PATH}"
 
-## Android platform tools
+## gnu
+export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/gnu-tar/libexec/gnubin${PATH+:$PATH}"
+export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/grep/libexec/gnubin${PATH+:$PATH}"
+export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/gawk/libexec/gnubin${PATH+:$PATH}"
+
+## adb
 export PATH="${ANDROID_HOME:-$ANDROID_SDK_ROOT}/emulator${PATH+:$PATH}"
 export PATH="${ANDROID_HOME:-$ANDROID_SDK_ROOT}/platform-tools${PATH+:$PATH}"
 
-## local/bin
+## local-bin
 export PATH="$HOME/.local/bin${PATH+:$PATH}"
 
 # -- Extensions --

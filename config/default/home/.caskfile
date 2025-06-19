@@ -17,6 +17,5 @@ cask "syntax-highlight"
 cask "telegram"
 cask "temurin@21"
 cask "utm"
-cask "warp"
 mas "Bitwarden", id: 1352778147
 mas "Xcode", id: 497799835

@@ -65,6 +65,7 @@ alias fzf_='fzf --preview-window "right:$(( $(tput cols) / 4 * 3 )):border-verti
 
 # -- Eval stuff --
 _evalcache zoxide init zsh --cmd=cd
+_evalcache fzf --zsh
 
 # -- Extensions --
 for ext in "$HOME"/.zshrc*.ext; do source "$ext"; done 2>/dev/null

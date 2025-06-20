@@ -1,6 +1,3 @@
-# -- Remove last login --
-printf '\33c\e[3J'
-
 # -- P10K --
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 	source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"

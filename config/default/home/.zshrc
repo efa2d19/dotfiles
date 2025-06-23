@@ -1,7 +1,9 @@
 # -- P10K --
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+[[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]] && {
+    # Instant sticky
+    printf "\e[H\e[${LINES}B"
 	source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+}
 
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -34,6 +36,22 @@ plugins=(
 )
 
 source "$ZSH/oh-my-zsh.sh"
+
+# -- Sticky prompt on precmd --
+function make_prompt_bottom_sticky() {
+    printf "\e[${LINES}B"
+}
+add-zsh-hook precmd make_prompt_bottom_sticky
+
+# -- Custon clear keybind --
+function custom_clear() {
+    printf "\e[H\e[2J\e[${LINES}B"
+    zle .reset-prompt
+    zle -R
+    printf '\e[3J'
+}
+zle -N custom_clear
+bindkey '^L' custom_clear
 
 # -- Custom aliases --
 

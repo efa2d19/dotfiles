@@ -482,15 +482,8 @@
   typeset -g POWERLEVEL9K_TIME_FORMAT='%D{%I:%M:%S %p}'
   typeset -g POWERLEVEL9K_TIME_UPDATE_ON_COMMAND=false
 
-  function prompt_example() {
-    p10k segment -f 208 -i '⭐' -t 'hello, %n'
-  }
-
-  function instant_prompt_example() {
-    prompt_example
-  }
   typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=always
-  typeset -g POWERLEVEL9K_INSTANT_PROMPT=verbose
+  typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
   typeset -g POWERLEVEL9K_DISABLE_HOT_RELOAD=true
   (( ! $+functions[p10k] )) || p10k reload
 }

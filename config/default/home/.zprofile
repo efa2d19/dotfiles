@@ -10,10 +10,6 @@ export GPG_TTY="$(tty)"
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 export JAVA_HOME="$(/usr/libexec/java_home -v 21)"
 
-## magic-enter
-MAGIC_ENTER_GIT_COMMAND='gst -u no'
-MAGIC_ENTER_OTHER_COMMAND='l'
-
 ## Secretive
 export SSH_AUTH_SOCK="$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
 

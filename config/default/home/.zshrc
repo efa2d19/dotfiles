@@ -63,6 +63,10 @@ bindkey -M viins '^[f' forward-word
 ## vi-mode
 VI_MODE_SET_CURSOR=true
 
+## magic-enter
+MAGIC_ENTER_GIT_COMMAND='gst -u no'
+MAGIC_ENTER_OTHER_COMMAND='l'
+
 # -- Custom aliases --
 
 ## ls

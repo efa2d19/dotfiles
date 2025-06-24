@@ -30,14 +30,12 @@ plugins=(
     history
     history-substring-search
     magic-enter
+    vi-mode
     zsh-autosuggestions
     zsh-syntax-highlighting
 )
 
 source "$ZSH/oh-my-zsh.sh"
-
-# -- vi mode --
-bindkey -v
 
 # -- Sticky prompt on precmd --
 function make_prompt_bottom_sticky() {
@@ -54,6 +52,16 @@ function custom_clear() {
 }
 zle -N custom_clear
 bindkey '^L' custom_clear
+
+# -- viins --
+bindkey -M viins '^[^?' backward-kill-word
+bindkey -M viins '^[b' backward-word
+bindkey -M viins '^[f' forward-word
+
+# -- Plugins settings --
+
+## vi-mode
+VI_MODE_SET_CURSOR=true
 
 # -- Custom aliases --
 

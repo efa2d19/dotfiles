@@ -74,6 +74,7 @@ MAGIC_ENTER_OTHER_COMMAND='l'
 ## ls
 alias l='eza -lagoL 3 --no-git --no-permissions --smart-group --color-scale=size'
 alias lg='eza -lagoL 3 --git --no-permissions --smart-group --color-scale=size'
+alias ls='l'
 
 ## JAVA_HOME change
 alias java@list='/usr/libexec/java_home -V'
@@ -91,7 +92,7 @@ alias glg='git lgs'
 alias glgs='git logs'
 alias 'gp!'='gp --no-verify'
 alias 'gpf!'='gpf --no-verify'
-alias gbc='git_current_branch | tr "\n" "\0" | tee "$(tty)" | clipcopy'
+alias gbc='git_current_branch | tee "$(tty)" | tr "\n" "\0" | clipcopy'
 alias git@prune='git fetch --prune && git branch -vv | awk "/: gone]/ && !/^\*/ {print \$1}" | xargs -r git branch -D'
 
 ## fzf

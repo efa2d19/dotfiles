@@ -37,6 +37,9 @@ plugins=(
 
 source "$ZSH/oh-my-zsh.sh"
 
+# -- vi mode --
+bindkey -v
+
 # -- Sticky prompt on precmd --
 function make_prompt_bottom_sticky() {
     printf "\e[${LINES}B"

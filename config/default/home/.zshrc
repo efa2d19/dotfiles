@@ -43,7 +43,9 @@ function make_prompt_bottom_sticky() {
 }
 add-zsh-hook precmd make_prompt_bottom_sticky
 
-# -- Custon clear keybind --
+# -- Keybinds --
+
+## clear + scrollback + sticky
 function custom_clear() {
     printf "\e[H\e[2J\e[${LINES}B"
     zle .reset-prompt
@@ -53,7 +55,7 @@ function custom_clear() {
 zle -N custom_clear
 bindkey '^L' custom_clear
 
-# -- viins --
+## viins
 bindkey -M viins '^[^?' backward-kill-word
 bindkey -M viins '^[b' backward-word
 bindkey -M viins '^[f' forward-word
@@ -102,5 +104,4 @@ _evalcache fzf --zsh
 # -- Extensions --
 for ext in "$HOME"/.zshrc*.ext; do source "$ext"; done 2>/dev/null
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

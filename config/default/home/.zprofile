@@ -22,12 +22,12 @@ export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --no-ignore-
 # -- Custom PATH mod --
 
 ## brew stuff
-export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/coreutils/libexec/gnubin${PATH+:$PATH}"
 export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/node/bin${PATH+:$PATH}"
 export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/python3/bin${PATH+:$PATH}"
 export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/curl/bin${PATH+:$PATH}"
 
 ## gnu
+export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/coreutils/libexec/gnubin${PATH+:$PATH}"
 export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/gnu-tar/libexec/gnubin${PATH+:$PATH}"
 export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/grep/libexec/gnubin${PATH+:$PATH}"
 export PATH="${HOMEBREW_PREFIX:-/opt/homebrew}/opt/gawk/libexec/gnubin${PATH+:$PATH}"

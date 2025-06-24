@@ -23,16 +23,15 @@ setopt NULLGLOB
 setopt EXTENDED_GLOB
 
 plugins=(
-	evalcache
-	git
-	magic-enter
-	colored-man-pages
-	extract
-	command-not-found
-	history
-	history-substring-search
-	zsh-autosuggestions
-	zsh-syntax-highlighting
+    command-not-found
+    evalcache
+    extract
+    git
+    history
+    history-substring-search
+    magic-enter
+    zsh-autosuggestions
+    zsh-syntax-highlighting
 )
 
 source "$ZSH/oh-my-zsh.sh"

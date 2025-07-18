@@ -37,22 +37,26 @@
 	line-numbers = true
 
 [merge]
-	conflictstyle = diff3
-	tool = intellij
-
-[mergetool "intellij"]
-	cmd = idea merge \
-		"$(pwd)/$LOCAL" \
-		"$(pwd)/$REMOTE" \
-		"$(pwd)/$BASE" \
-		"$(pwd)/$MERGED"
-	trustExitCode = false
+    conflictstyle = diff3
+    tool = nvimdiff
+    guitool = nvimdiff
 
 [mergetool]
-	keepBackup = false
+    prompt = false
+    guiDefault = false
+    keepBackup = false
+
+[mergetool "nvimdiff"]
+    cmd = nvim -d "$LOCAL" "$MERGED" "$REMOTE" -c \"wincmd l\"
 
 [diff]
-	colorMoved = default
+    tool = nvimdiff
+    guitool = nvimdiff
+    colorMoved = default
+
+[difftool]
+    prompt = false
+    guiDefault = false
 
 [gpg "ssh"]
 	allowedSignersFile = ~/.config/git/allowed_signers

@@ -1,40 +1,40 @@
 [credential]
-	helper = store
+    helper = store
 
 [user]
-	name = efa2d19
-	email = <placeholder>
+    name = efa2d19
+    email = <placeholder>
 
 [commit]
-	gpgsign = true
+    gpgsign = true
 
 [tag]
-	gpgsign = true
+    gpgsign = true
 
 [gpg]
-	format = ssh
+    format = ssh
 
 [alias]
-	lgs = log --decorate --graph --oneline
-	logs = log --decorate --graph
-	pullsafe = !git stash -m temp && git pull && git stash pop
+    lgs = log --decorate --graph --oneline
+    logs = log --decorate --graph
+    pullsafe = !git stash -m temp && git pull && git stash pop
 
 [push]
-	autoSetupRemote = true
+    autoSetupRemote = true
 
 [core]
-	pager = delta
-	commitGraph = true
-	preloadIndex = true
+    pager = delta
+    commitGraph = true
+    preloadIndex = true
 
 [interactive]
-	diffFilter = delta --color-only
+    diffFilter = delta --color-only
 
 [delta]
-	navigate = true
-	light = false
-	side-by-side = true
-	line-numbers = true
+    navigate = true
+    light = false
+    side-by-side = true
+    line-numbers = true
 
 [merge]
     conflictstyle = diff3
@@ -59,10 +59,10 @@
     guiDefault = false
 
 [gpg "ssh"]
-	allowedSignersFile = ~/.config/git/allowed_signers
+    allowedSignersFile = ~/.config/git/allowed_signers
 
 [rerere]
-	enabled = true
+    enabled = true
 
 [include]
-	path = ~/.gitconfig.ext
+    path = ~/.gitconfig.ext

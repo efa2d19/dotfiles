@@ -39,6 +39,8 @@ keybind = super+equal=ignore
 keybind = super+plus=ignore
 keybind = super+minus=ignore
 keybind = super+zero=ignore
+keybind = ctrl+tab=text:\x09
+keybind = ctrl+shift+tab=ignore
 
 macos-titlebar-style = tabs
 macos-option-as-alt = true

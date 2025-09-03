@@ -1,0 +1,28 @@
+# -- Binds --
+key_show_hints='<Fn>f'
+key_start_scroll='<Fn>d'
+key_mouse_left='<S>h'
+key_mouse_down='<S>j'
+key_mouse_up='<S>k'
+key_mouse_right='<S>l'
+key_scroll_left='h'
+key_scroll_down='j'
+key_scroll_up='k'
+key_scroll_right='l'
+key_scroll_page_up='u'
+key_scroll_page_down='i'
+key_right_click='<S><CR>'
+
+# -- Font --
+hint_font_size=11.0
+hint_triangle_height=4.0
+grid_font_size=11.0
+
+# -- Scrolling --
+mouse_size=0.0
+scroll_size_vertical=40
+scroll_size_horizontal=40
+scroll_size_vertical_page=200
+
+# -- Misc --
+system_menu_poll=0

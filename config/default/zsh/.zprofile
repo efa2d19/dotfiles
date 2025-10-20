@@ -16,6 +16,9 @@ export SSH_AUTH_SOCK="$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAg
 ## fzf search w/ hidden files
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --no-ignore-vcs --follow --exclude .git --exclude .DS_Store'
 
+## fzf preview scroll binds
+export FZF_DEFAULT_OPTS='--bind ctrl-alt-k:preview-up,ctrl-alt-j:preview-down'
+
 ## Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 

@@ -26,3 +26,5 @@ scroll_size_vertical_page=200
 
 # -- Misc --
 system_menu_poll=0
+abc_layout=com.apple.keylayout.ABC
+show_menu_item=false

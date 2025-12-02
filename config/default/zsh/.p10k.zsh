@@ -29,6 +29,8 @@
     # =========================[ Line #2 ]=========================
     newline                 # \n
     prompt_char             # prompt symbol
+    # =========================[ Line #3 ]=========================
+    newline                 # \n
   )
 
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
@@ -114,7 +116,7 @@
 
   typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=
   typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_PREFIX=
-  typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX='\n'
+  typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX=
   typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_SUFFIX=
   typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_SUFFIX=
   typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_SUFFIX=

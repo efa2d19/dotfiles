@@ -2,9 +2,10 @@ DOTFILES_DIR := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 SHELL := /usr/bin/env zsh
 PATH := $(DOTFILES_DIR)/bin:$(PATH)
 
-.PHONY: all
+.PHONY: update
 
-all: sys brew-all link dock zsh xcode-clt
+install: sys brew-all link dock zsh xcode-clt
+update: sys brew-all link dock
 
 brew:
 	depends-on brew || curl -fsSL 'https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh' | bash
@@ -39,7 +40,9 @@ xcode-clt:
 	xcode-select --install || true
 
 zsh:
-	./system/zsh --all
+	mkdir -p ~/.config/tmux/plugins/catppuccin
+	git clone https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux || true
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)"
 
 pull:
 	git -c protocol.file.allow=always submodule update --remote --checkout --force

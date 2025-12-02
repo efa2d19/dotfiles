@@ -10,8 +10,6 @@ theme = main
 background = #1e1e1f
 cursor-style = bar
 cursor-style-blink = false
-unfocused-split-opacity = 0.5
-split-divider-color = #4a4a4a
 
 working-directory = home
 window-inherit-working-directory = false
@@ -45,5 +43,6 @@ keybind = ctrl+shift+tab=ignore
 macos-titlebar-style = tabs
 macos-option-as-alt = true
 macos-icon = xray
+macos-titlebar-style = hidden
 
 auto-update = off

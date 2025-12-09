@@ -103,7 +103,7 @@ alias lg='eza -lagoL 3 --git --no-permissions --smart-group --color-scale=size'
 alias java@list='/usr/libexec/java_home -V'
 
 ## brew
-alias brew@upd='brew cu -af --cleanup --include-mas && brew upgrade'
+alias brew@upd='brew cu -af --cleanup && brew upgrade'
 alias brew@dump='brew bundle dump --formula --tap --force --file="${HOME}/.brewfile"; brew bundle dump --cask --mas --force --file="${HOME}/.caskfile"'
 alias brew@cleanup='brew bundle --cleanup --force --file <(cat "${HOME}/.brewfile" "${HOME}/.caskfile")'
 

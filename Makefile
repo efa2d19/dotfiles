@@ -42,7 +42,7 @@ xcode-clt:
 zsh:
 	mkdir -p ~/.config/tmux/plugins/catppuccin
 	git clone https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux || true
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)"
+	Z4H_BOOTSTRAPPING=1 . ~/.zshenv
 
 pull:
 	git -c protocol.file.allow=always submodule update --remote --checkout --force

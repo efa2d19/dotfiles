@@ -54,6 +54,10 @@ function get_extensions() {
     unset ext_arr
 }
 
+function acquire_root() {
+    sudo echo &>/dev/null || { echo '[!] Incorrect credentials' && exit 1 }
+}
+
 function process() {
     for key val in "${(@kv)nice_arr}"; do
         (( $key >= 0 )) && { priority="+${key}" } || { priority="$key" }
@@ -80,8 +84,8 @@ function main() {
     check_deps
     declare -A nice_arr
     get_extensions
+    acquire_root
     process
-
 }
 
 main

@@ -16,19 +16,19 @@ window-inherit-working-directory = false
 window-inherit-font-size = false
 window-save-state = never
 
-window-height = 38
-window-width = 145
+window-height = 40
+window-width = 155
 
 # for 14"
-# window-height = 35
-# window-width = 140
+# window-height = 34
+# window-width = 135
 
 window-padding-x = 8,2
 window-padding-y = 2,5
 
 copy-on-select = false
 mouse-hide-while-typing = true
-shell-integration-features = no-cursor,no-sudo,title,ssh-env
+shell-integration-features = no-cursor,no-sudo,no-title,ssh-env
 confirm-close-surface = false
 
 keybind = cmd+k=jump_to_prompt:-1
@@ -40,7 +40,6 @@ keybind = super+zero=ignore
 keybind = ctrl+tab=text:\x09
 keybind = ctrl+shift+tab=ignore
 
-macos-titlebar-style = tabs
 macos-option-as-alt = true
 macos-icon = xray
 macos-titlebar-style = hidden

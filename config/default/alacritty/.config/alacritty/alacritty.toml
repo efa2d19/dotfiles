@@ -1,0 +1,50 @@
+[general]
+live_config_reload = false
+
+[window]
+dimensions = { columns = 126, lines = 36 }
+padding = { x = 8, y = 4 }
+dynamic_title = false
+decorations = "Buttonless"
+option_as_alt = "Both"
+resize_increments = true
+
+[font]
+normal = { family = "Hack Nerd Font Mono", style = "Regular" }
+size = 12
+
+[colors]
+cursor = { text = "#000000", cursor = "#ffffff" }
+selection = { text = "#e0e0e0", background = "#3a3d41" }
+
+[colors.primary]
+background = "#1e1e1f"
+foreground = "#ffffff"
+
+[colors.normal]
+black = "#616161"
+red = "#ff8272"
+green = "#b4fa72"
+yellow = "#fefdc2"
+blue = "#a5d5fe"
+magenta = "#ff8ffd"
+cyan = "#d0d1fe"
+white = "#f1f1f1"
+
+[colors.bright]
+black = "#8e8e8e"
+red = "#ffc4bd"
+green = "#d6fcb9"
+yellow = "#fefdd5"
+blue = "#c1e3fe"
+magenta = "#ffb1fe"
+cyan = "#e5e6fe"
+white = "#feffff"
+
+[cursor]
+style = { shape = "Beam", blinking = "Never" }
+unfocused_hollow = true
+thickness = 0.35
+
+[mouse]
+hide_when_typing = true

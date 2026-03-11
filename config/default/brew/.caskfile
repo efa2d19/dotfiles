@@ -1,3 +1,4 @@
+cask "alacritty"
 cask "aldente"
 cask "android-commandlinetools"
 cask "android-platform-tools"

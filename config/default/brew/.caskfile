@@ -13,7 +13,7 @@ cask "raycast"
 cask "secretive"
 cask "syntax-highlight"
 cask "telegram"
-cask "temurin@21"
+cask "temurin@25"
 cask "utm"
 mas "Bitwarden", id: 1352778147
 mas "Xcode", id: 497799835

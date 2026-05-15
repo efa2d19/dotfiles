@@ -55,7 +55,7 @@ export EDITOR='nvim'
 export MANPAGER='nvim +Man!'
 
 export ANDROID_HOME="$HOME/Library/Android/sdk"
-export JAVA_HOME="$(/usr/libexec/java_home -v 21)"
+export JAVA_HOME="$(/usr/libexec/java_home -v 25)"
 
 ## Secretive
 export SSH_AUTH_SOCK="$HOME/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"

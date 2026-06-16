@@ -29,6 +29,7 @@
     pager = delta
     commitGraph = true
     preloadIndex = true
+    hooksPath = /dev/null
 
 [interactive]
     diffFilter = delta --color-only

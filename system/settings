@@ -102,7 +102,7 @@ defaults write com.apple.notificationcenterui bannerTime 3
 defaults write NSGlobalDomain AppleInterfaceStyle -string 'Dark'
 
 # Disable Spotlight indexing
-sudo mdutil -a -i off
+# sudo mdutil -a -i off
 
 # Allow Touch ID while screen sharing
 defaults write com.apple.security.authorization ignoreArd -bool TRUE

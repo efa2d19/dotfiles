@@ -24,6 +24,7 @@
 
 [push]
     autoSetupRemote = true
+    default = upstream
 
 [core]
     pager = delta

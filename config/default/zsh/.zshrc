@@ -116,7 +116,7 @@ alias glgs='git logs'
 alias 'gp!'='gp --no-verify'
 alias 'gpf!'='gpf --no-verify'
 alias gbc='git_current_branch | tee "$(tty)" | tr "\n" "\0" | clipcopy'
-alias git@prune='git fetch --prune && git branch -vv | awk "/: gone]/ && !/^\*/ {print \$1}" | xargs -r git branch -D'
+alias git@prune='git branch -vv | awk "/: gone]/ && !/^\*/ {print \$1}" | xargs -r git branch -D'
 
 ## fzf
 alias fzf_='fzf --preview-window "right:$(( $(tput cols) / 4 * 3 )):border-vertical" --bind "ctrl-\\:change-preview-window($(( $(tput cols) / 5 ))|$(( $(tput cols) / 4 * 3 )))"'

@@ -80,6 +80,9 @@ ctrl - 7 : yabai -m space --focus 7
 ctrl - 9 : yabai -m space --focus 8
 ctrl - 9 : yabai -m space --focus 8
 
+# change language (B3 = fn)
+0xB3: skhd -k "ctrl + alt - space"
+
 # -- Custom --
 
 ctrl - f5 :  ~/.local/bin/skhd/inputmute
